@@ -85,8 +85,6 @@ Se implementan **VLANs**, **OSPF selectivo**, **enrutamiento estático**, **DHCP
 
 ## 🔹 Capturas
 ![Topología de red](Mylab.png)
-![Configuración de switches](config_switches.png)
-![Prueba de ping y VoIP](ping_voip.png)
 
 ---
 
@@ -95,11 +93,11 @@ Se implementan **VLANs**, **OSPF selectivo**, **enrutamiento estático**, **DHCP
 - [configuraciones.txt](configuraciones.txt) → Configuración de routers y switches.  
 ---
 
-## 🔹 Futuras mejoras
-- Implementar HSRP/VRRP para redundancia en gateways.  
+## 🔹 Futuras mejoras  
 - Integrar servidor Syslog para centralizar logs.  
 - Monitoreo con SNMP.  
 
 ---
 👨‍💻 Autor: Juan R.
+
 
