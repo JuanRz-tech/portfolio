@@ -4,7 +4,7 @@ Mi portfolio profesional en redes y ciberseguridad
 
 # 👋 Hola, soy Juan R.
 
-Administrador de redes en formación, con experiencia en configuración de equipos Cisco, cableado estructurado, VLANs, ACLs, enrutamiento estático y OSPF.  
+Administrador de redes con experiencia en Cisco, Routing, Switching y cableado estructurado  
 Actualmente me estoy especializando en **ciberseguridad y análisis SOC** para evolucionar mi carrera hacia la protección de infraestructuras y detección de incidentes.
 
 ---
@@ -12,8 +12,9 @@ Actualmente me estoy especializando en **ciberseguridad y análisis SOC** para e
 ## 📂 Proyectos Destacados
 
 ### 1. 🌐 Laboratorio de Redes Cisco
-- Configuración de VLANs y ACLs en Packet Tracer.
-- Implementación de OSPF para enrutamiento dinámico.
+- Configuración de equipos en Packet Tracer.
+- Implementación de una red empresarial mediana y
+   lo neecsario para su correcto funsionamiento  .
 - Simulación de escenarios de acceso seguro.
 - **Repositorio / Documentación**: [Enlace aquí]
 
