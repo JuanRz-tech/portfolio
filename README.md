@@ -16,7 +16,7 @@ Actualmente me estoy especializando en **ciberseguridad y análisis SOC** para e
 - Implementación de una red empresarial mediana y
    lo necesario para su correcto funsionamiento  .
 - Simulación de escenarios de acceso seguro.
-- **Repositorio / Documentación**: [Networking/Readme.md]
+- **Repositorio / Documentación**: Networking/README.md
 
 ---
 
