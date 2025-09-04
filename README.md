@@ -14,7 +14,7 @@ Actualmente me estoy especializando en **ciberseguridad y análisis SOC** para e
 ### 1. 🌐 Laboratorio de Redes Cisco
 - Configuración de equipos en Packet Tracer.
 - Implementación de una red empresarial mediana y
-   lo neecsario para su correcto funsionamiento  .
+   lo necesario para su correcto funsionamiento  .
 - Simulación de escenarios de acceso seguro.
 - **Repositorio / Documentación**: [Enlace aquí]
 
