@@ -89,8 +89,8 @@ Se implementan **VLANs**, **OSPF selectivo**, **enrutamiento estático**, **DHCP
 ---
 
 ## 🔹 Archivos
-- [topologia.pkt](Mylab.pkt) → Archivo de Packet Tracer.  
-- [configuraciones.txt](configuraciones.txt) → Configuración de routers y switches.  
+- [topologia.pkt](Mylab.pkt) → Archivo de Packet Tracer.
+    
 ---
 
 ## 🔹 Futuras mejoras  
@@ -99,5 +99,6 @@ Se implementan **VLANs**, **OSPF selectivo**, **enrutamiento estático**, **DHCP
 
 ---
 👨‍💻 Autor: Juan R.
+
 
 
