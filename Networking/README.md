@@ -84,14 +84,15 @@ Se implementan **VLANs**, **OSPF selectivo**, **enrutamiento estático**, **DHCP
 ---
 
 ## 🔹 Capturas
-📌 [Incluir aquí capturas del Packet Tracer: topología, configuración de switches/routers, pruebas de ping y VoIP]  
+![Topología de red](Mylab.png)
+![Configuración de switches](config_switches.png)
+![Prueba de ping y VoIP](ping_voip.png)
 
 ---
 
 ## 🔹 Archivos
-- `topologia.pkt` → Archivo de Packet Tracer.  
-- `configuraciones.txt` → Configuración de routers y switches.  
-
+- [topologia.pkt](Mylab.pkt) → Archivo de Packet Tracer.  
+- [configuraciones.txt](configuraciones.txt) → Configuración de routers y switches.  
 ---
 
 ## 🔹 Futuras mejoras
@@ -101,3 +102,4 @@ Se implementan **VLANs**, **OSPF selectivo**, **enrutamiento estático**, **DHCP
 
 ---
 👨‍💻 Autor: Juan R.
+
