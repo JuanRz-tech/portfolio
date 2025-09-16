@@ -1,0 +1,118 @@
+==============================
+Configuración en Router
+==============================
+
+# Configuración básica
+hostname <NOMBRE_ROUTER>                       -> Cambia el nombre del router
+enable secret <CLAVE_ENCRIPTADA>               -> Contraseña encriptada para modo privilegiado
+ip domain-name <DOMINIO>                       -> Define dominio necesario para claves SSH
+crypto key generate rsa modulus 2048           -> Genera claves RSA de 2048 bits para SSH
+ip ssh version 2                               -> Habilita SSH versión 2
+username <USUARIO> privilege 15 secret <CLAVE> -> Crea usuario con privilegios de administrador
+banner motd # Mensaje de advertencia #         -> Mensaje al iniciar sesión
+
+# Configuración DHCP (servidor)
+ip dhcp excluded-address <IP_INICIAL> <IP_FINAL> -> Rango de IPs excluidas
+ip dhcp pool <NOMBRE_POOL>
+ network <RED> <MÁSCARA>                        -> Red y máscara para el pool
+ default-router <GATEWAY>                       -> Puerta de enlace que asignará
+ dns-server <IP_DNS>                            -> Servidor DNS asignado
+
+# Interfaces físicas
+interface GigabitEthernet0/0
+ ip address <IP> <MÁSCARA>                      -> Asignar dirección IP a interfaz
+ no shutdown                                    -> Habilitar la interfaz
+
+# Subinterfaces (Router-on-a-stick para VLANs)
+interface GigabitEthernet0/1.<SUBIF>
+ encapsulation dot1Q <VLAN_ID>                  -> Encapsulación 802.1Q en la VLAN indicada
+ ip address <IP> <MÁSCARA>                      -> IP de la subinterfaz
+ description <DESCRIPCION>                      -> Identificación
+ ip helper-address <IP_SERVIDOR_DHCP>           -> Redirige peticiones DHCP
+ ip access-group <ACL> in/out                   -> Aplica ACL entrante o saliente
+
+
+# Habilitar enrutamiento
+ip routing                                     -> Habilita el forwarding entre interfaces (por defecto en routers físicos)
+no ip routing                                  -> Desactiva el forwarding entre interfaces (útil en algunos switch L3)
+
+# Routing
+## Rutas estáticas
+ip route <RED_DESTINO> <MÁSCARA> <NEXT_HOP>     -> Configura ruta estática hacia red destino vía next hop
+ip route <RED_DESTINO> <MÁSCARA> <INTERFAZ>     -> Configura ruta estática directamente por interfaz
+
+
+# Routing dinámico (con OSPF)
+router ospf <ID_PROCESO>
+ network <RED> <WILDCARD> area <AREA>           -> Redes a anunciar en OSPF
+
+# Listas de Control de Acceso (ACLs)
+ip access-list extended <NOMBRE_ACL>
+ permit <PROTOCOLO> <ORIGEN> <WILDCARD> <DESTINO> <WILDCARD> -> Permite tráfico
+ deny <PROTOCOLO> <ORIGEN> <WILDCARD> <DESTINO> <WILDCARD>   -> Deniega tráfico
+ permit ip any any                                            -> Permite el resto
+
+access-list <NUMERO> deny <PROTOCOLO> <ORIGEN> <WILDCARD> <DESTINO> eq <PUERTO>
+access-list <NUMERO> permit ip any any
+
+# Acceso remoto (líneas VTY)
+line vty 0 4
+ login local                                   -> Requiere login con usuarios locales
+ transport input ssh                           -> Permite acceso solo por SSH
+
+line vty 5 15
+ login local
+ transport input ssh
+
+==============================
+
+
+
+==============================
+Configuración en Switch 
+==============================
+
+# Configuración básica
+hostname <NOMBRE_SWITCH>                       -> Cambia el nombre del switch
+enable secret <CLAVE_ENCRIPTADA>               -> Establece la contraseña encriptada para modo privilegiado
+ip domain-name <DOMINIO>                       -> Define dominio necesario para claves SSH
+crypto key generate rsa modulus 2048           -> Genera claves RSA de 2048 bits para SSH
+ip ssh version 2                               -> Habilita SSH versión 2
+username <USUARIO> privilege 15 secret <CLAVE> -> Crea usuario con contraseña encriptada y privilegios de administrador
+banner motd # Mensaje de advertencia #         -> Mensaje al iniciar sesión
+
+
+# EtherChannel (Port-channels)
+interface Port-channel<#>
+ switchport mode trunk                         -> Configura el port-channel en modo trunk
+
+# Interfaces en modo trunk
+interface <INTERFAZ_TRUNK>
+ switchport mode trunk
+ switchport trunk allowed vlan <LISTA_VLANs>
+ channel-group <#> mode desirable
+
+# Interfaces en modo access (puerto a host)
+interface <INTERFAZ_ACCESS>
+ switchport mode access
+ switchport access vlan <VLAN_ID>
+ description <DESCRIPCION>                     -> Identifica el puerto
+ switchport port-security                      -> (Opcional) Habilitar seguridad de puerto
+ switchport voice vlan <VLAN_VOZ>              -> VLAN para teléfonos IP
+
+# VLAN Interfaces (SVI)
+interface Vlan<#>
+ ip address <IP> <MÁSCARA>                     -> IP asignada a la VLAN para gestión
+ 
+shutdown                                       -> Usado en general para deshabilitar las interfaces no usadas
+
+# Acceso remoto (líneas VTY)
+line vty 0 4
+ login local                                   -> Requiere login con usuarios locales
+ transport input ssh                           -> Permite acceso remoto solo por SSH
+
+line vty 5 15
+ login local
+ transport input ssh
+
+==============================
