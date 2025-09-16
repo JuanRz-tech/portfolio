@@ -90,7 +90,7 @@ Se implementan **VLANs**, **OSPF selectivo**, **enrutamiento estático**, **DHCP
 
 ## 🔹 Archivos
 - [topologia.pkt](Mylab.pkt) → Archivo de Packet Tracer.
-- - [configuraciones.txt](configuraciones.txt) → Archivo txt.
+- [configuraciones.txt](configuraciones.txt) → Archivo txt.
     
 ---
 
@@ -100,6 +100,7 @@ Se implementan **VLANs**, **OSPF selectivo**, **enrutamiento estático**, **DHCP
 
 ---
 👨‍💻 Autor: Juan R.
+
 
 
 
