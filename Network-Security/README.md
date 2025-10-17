@@ -1,103 +1,128 @@
-# 🏢 Laboratorio de Red Empresarial Avanzada - Cisco Packet Tracer
+# 🛡️ Laboratorio de Seguridad Perimetral con FortiGate - GNS3
 
 ## 🔹 Descripción
-Este laboratorio simula la infraestructura de red de una empresa mediana con múltiples departamentos, servidores internos y externos, además de servicios de voz sobre IP (VoIP).  
-Se implementan **VLANs**, **OSPF selectivo**, **enrutamiento estático**, **DHCP**, **ACLs extendidas**, y **EtherChannel** para optimizar la conectividad, seguridad y redundancia.
+
+Este laboratorio implementa un entorno de **seguridad perimetral empresarial** utilizando un **firewall FortiGate** desplegado en **GNS3**, con el objetivo de proteger la red interna frente a amenazas externas y controlar el acceso a los servicios críticos de la organización.
+
+El proyecto reproduce un escenario realista en el que una empresa cuenta con distintos segmentos de red internos (LAN, DMZ y Administración) y un enlace WAN hacia Internet.  
+Se aplican **políticas de filtrado**, **NAT**, **zonas de seguridad**, **segmentación**, y **reglas de acceso basadas en roles** para garantizar la integridad, disponibilidad y confidencialidad de los recursos internos.
+
+---
+
+## 🔹 Objetivos del Laboratorio
+
+- Implementar un **firewall perimetral FortiGate** en GNS3.  
+- Configurar **interfaces, zonas y rutas** para segmentar la red.  
+- Aplicar **políticas de seguridad** entre redes internas y externas.  
+- Configurar **NAT y políticas de acceso a Internet**.  
+- Implementar **una DMZ** con servidores públicos (WEB y DNS).  
+- Realizar **pruebas de tráfico** y validación de políticas.  
+- Documentar reglas, resultados y buenas prácticas de seguridad.
 
 ---
 
 ## 🔹 Topología
-📌 La red se compone de:  
 
-- **6 VLANs internas**:  
-  - VLAN 10: Sistemas (192.168.10.0/24)  
-  - VLAN 15: Servidores (192.168.15.0/24)  
-  - VLAN 20: Ventas (192.168.20.0/24)  
-  - VLAN 30: Finanzas (192.168.30.0/24)  
-  - VLAN 40: Atención C. (192.168.40.0/24)  
-  - VLAN 50: Voz - Teléfonos IP (192.168.50.0/24)  
+📌 La red se compone de:
 
-- **Redes externas**:  
-  - Consultores (192.168.1.0/24)  
-  - Servidor Externo (10.0.25.0/24)  
+- **Red administrativa** → 192.168.10.0/24  
+   Acceso exclusivo para personal TI y gestión de dispositivos.
 
-- **Routers**:  
-  - 3 routers usando **OSPF** para enrutamiento dinámico (solo VLAN 10 y VLAN 20).  
-  - 1 router con **rutas estáticas** para un segmento específico.  
+- **DMZ (zona desmilitarizada)** → 192.168.15.0/24  
+  Servidores accesibles desde Internet (por ejemplo, WEB/DNS).
 
-- **Switches internos**:  
-  - Todos administrables por la VLAN 10.  
+- **LAN interna** → 192.168.20.0/24  
+ Segmento de usuarios y equipos internos.
 
-- **Servicios de red**:  
-  - DHCP_pool_Sistemas en Router 1.  
-  - DHCP_pool_Consultores en Router 2.  
-  - Servidor DHCP dedicado (192.168.15.10).  
-  - Servidor DNS/WEB (192.168.15.15).  
+- **WAN (Internet simulado)** → 10.0.0.0/24  
+  Segmento externo conectado al router ISP o nube simulada.
+
+### 🔧 Equipos Simulados en GNS3
+
+| Dispositivo | Función | IP Principal |
+|--------------|----------|--------------|
+| FortiGate VM | Firewall perimetral | WAN: 10.0.0.2 / ADMIN: 192.168.10.1 / DMZ: 192.168.15.1 / LAN: 192.168.20.1 |
+| Router ISP | Enlace a Internet | 10.0.0.1 |
+| Servidor WEB (DMZ) | Página institucional | 192.168.15.10 |
+| Servidor DNS (DMZ) | Resolución interna/externa | 192.168.15.11 |
+| PC Usuario | Equipo en LAN | DHCP o IP fija |
+| PC Admin | Gestión del firewall | 192.168.10.10 |
 
 ---
 
 ## 🔹 Tecnologías Implementadas
-- VLANs (datos y voz).  
-- Trunking 802.1Q.  
-- OSPF limitado.  
-- Enrutamiento estático.  
-- DHCP en router y servidor.  
-- ACLs extendidas.  
-- EtherChannel (PAgP).  
-- VoIP con asignación dinámica de direcciones IP.  
+
+- **Firewall FortiGate (versión trial)**  
+- **Segmentación de red** mediante interfaces y zonas (LAN / DMZ / WAN / ADMIN)  
+- **Políticas de seguridad**:
+  - Acceso LAN → Internet permitido (HTTP, HTTPS, DNS)
+  - Acceso DMZ → limitado solo a servicios públicos
+  - Acceso WAN → restringido hacia la red interna
+- **NAT (Source NAT y Destination NAT)**  
+  - Traducción de direcciones para acceso a Internet y publicación de servicios
+- **Rutas estáticas** para conectividad entre segmentos  
+- **Filtrado de tráfico y control de puertos**  
+- **Pruebas de conectividad y seguridad**
 
 ---
 
 ## 🔹 Configuraciones Clave
-1. **VLANs y Trunking**  
-   - Creación de VLANs de datos y voz.  
-   - Configuración de puertos en modo acceso (PC + Teléfono IP).  
-   - Configuración de puertos troncales entre switches.  
 
-2. **EtherChannel**  
-   - Configuración de PAgP en enlaces redundantes entre switches.  
+### 1. Interfaces y Zonas
+- Creación de interfaces LAN, DMZ, ADMIN y WAN.
+- Asignación de direcciones IP a cada segmento.
+- Agrupación en zonas de seguridad para simplificar políticas.
 
-3. **Enrutamiento**  
-   - OSPF configurado únicamente en VLAN 10 y VLAN 20.  
-   - Rutas estáticas en un router adicional para conectividad controlada.  
+### 2. Políticas de Firewall
+- **LAN → WAN:** Permitir HTTP/HTTPS/DNS con NAT.  
+- **LAN → DMZ:** Solo acceso a servicios específicos (p. ej. DNS).  
+- **WAN → DMZ:** Solo HTTP/HTTPS hacia servidor web publicado.  
+- **ADMIN → LAN/DMZ/WAN:** Acceso total para gestión.
 
-4. **DHCP**  
-   - Router 1 configurado como servidor DHCP para VLAN 10 (Sistemas).  
-   - Router 2 configurado como servidor DHCP para Consultores.  
-   - Servidor DHCP dedicado para VLAN 20, 30, 40 y 50.
+### 3. NAT
+- **Source NAT (SNAT):** LAN accede a Internet mediante IP WAN.  
+- **Destination NAT (DNAT):** Redirección de tráfico WAN → servidor web DMZ.
 
-5. **ACLs Extendidas**  
-   - Permitir solo a VLAN 10 hacer ping a VLAN 15.  
-   - Negar acceso desde VLAN 40 a la web de VLAN 15.  
+### 4. Ruteo
+- Rutas estáticas configuradas para asegurar conectividad entre segmentos internos y el exterior.
+
+### 5. Monitoreo
+- Uso de **FortiView** y **Logs en tiempo real** para verificar políticas y tráfico.
 
 ---
 
 ## 🔹 Resultados de Pruebas
-- ✅ Conectividad entre VLANs autorizadas.  
-- ✅ Bloqueo de accesos no permitidos con ACLs.  
-- ✅ PCs obtienen IP dinámica desde router o servidor DHCP.  
-- ✅ Teléfonos IP obtienen IP desde VLAN de voz y permiten acceso de PC en mismo puerto.  
-- ✅ OSPF operativo solo en VLANs especificas.  
-- ✅ Rutas estáticas funcionando en paralelo.  
-- ✅ EtherChannel operativo entre switches.  
+
+✅ Usuarios de LAN navegan hacia Internet correctamente.  
+✅ Servidor web accesible desde Internet (mediante DNAT).  
+✅ Acceso restringido desde WAN hacia LAN.  
+✅ Administrador con acceso completo para monitoreo y gestión.  
+✅ Políticas aplicadas correctamente según roles y zonas.  
+✅ Tráfico no autorizado bloqueado y registrado en logs.
 
 ---
 
-## 🔹 Capturas
-📌 [Incluir aquí capturas del Packet Tracer: topología, configuración de switches/routers, pruebas de ping y VoIP]  
+## 🔹 Archivos del Proyecto
+
+- `fortigate_gns3_topology.gns3` → Archivo de topología para GNS3  
+- `config_fortigate.txt` → Configuraciones exportadas del firewall  
+- `pruebas_y_resultados.md` → Resultados de las pruebas de tráfico  
+- `capturas/` → Carpeta con capturas de pantalla de la topología y políticas
 
 ---
 
-## 🔹 Archivos
-- `topologia.pkt` → Archivo de Packet Tracer.  
-- `configuraciones.txt` → Configuración de routers y switches.  
+## 🔹 Futuras Mejoras
+
+- Integrar **IDS/IPS** para detección de intrusiones.  
+- Implementar **VPN site-to-site** para acceso remoto seguro.  
+- Añadir **monitoreo centralizado (FortiAnalyzer / Syslog)**.  
+- Automatizar backups de configuración.  
+- Simular acceso remoto de usuarios mediante **SSL VPN**.
 
 ---
 
-## 🔹 Futuras mejoras
-- Implementar HSRP/VRRP para redundancia en gateways.  
-- Integrar servidor Syslog para centralizar logs.  
-- Monitoreo con SNMP.  
+## 👨‍💻 Autor
 
----
-👨‍💻 Autor: Juan R.
+**Juan R.**  
+Proyecto académico y profesional de laboratorio sobre **Seguridad Perimetral con FortiGate**, desarrollado en **GNS3**.  
+📘 Objetivo: reforzar competencias prácticas en **Network Security** y **gestión de firewalls empresariales**.
