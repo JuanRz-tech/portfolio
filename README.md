@@ -23,7 +23,7 @@ Actualmente me estoy especializando en **ciberseguridad y análisis SOC** para e
 - Implementación de un **firewall perimetral** con reglas de acceso.  
 - Configuración de políticas de seguridad y segmentación de red.  
 - Pruebas de filtrado de tráfico y control de acceso a servicios internos.  
-- **Repositorio / Documentación**: [Fortinet-pfSense](Fortinet-pfSense/README.md)  
+- **Repositorio / Documentación**: [Network Security](Network Security/README.md)  
 
 ---
 
