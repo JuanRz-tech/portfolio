@@ -49,23 +49,22 @@ El objetivo principal es aprender a crear imágenes personalizadas, configurar r
 ## 🔹 Configuraciones Clave
 
 ### 🔸 Estructura del Proyecto
-```                            
-Docker-Labs/
-├── compose.yaml
-├── app/
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── app.py├── prometheus/
-│   ├── prometheus.yml
-│   └── data/
-├── grafana/
-│   └── provisioning/
-│       ├── dashboards/
-│       └── datasources/
-├── portainer/
-│   └── config/
-└── README.md
-```
+                           
+Docker-Labs/  
+├── compose.yaml  
+├── app/  
+│   ├── Dockerfile  
+│   ├── requirements.txt  
+│   └── app.py├── prometheus/  
+│   ├── prometheus.yml  
+│   └── data/  
+├── grafana/  
+│   └── provisioning/  
+│       ├── dashboards/  
+│       └── datasources/  
+├── portainer/  
+│   └── config/  
+└── README.md  
 
 ---
 
