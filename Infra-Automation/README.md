@@ -131,6 +131,6 @@ Archivo de integración: terraform_apply.sh
 * Usar Vault para cifrado de contraseñas y claves privadas.
 * Crear templates de roles reutilizables (roles/ folder).
 
-👨‍💻 Autor: Juan R.
-📘 Repositorio: Infra-Automation
-🗓️ Versión: 1.0
+👨‍💻 Autor: Juan R.  
+📘 Repositorio: Infra-Automation  
+🗓️ Versión: 1.0  
