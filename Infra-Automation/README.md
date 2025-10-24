@@ -89,6 +89,8 @@ backup.yml
 * Ansible toma el control post-provisioning para configurar los sistemas automáticamente.
 * Archivo de integración: terraform_apply.sh
 
+---
+
 ## 🔹 Resultados de Pruebas
 
 ✅ Ejecución exitosa de playbooks en servidores locales y cloud.
@@ -101,10 +103,12 @@ backup.yml
 
 ✅ Control centralizado de todos los servidores desde un solo nodo.
 
+---
+
 ## 🔹 Capturas
 
 
-
+---
 
 ## 🔹 Archivos
 
@@ -114,12 +118,16 @@ backup.yml
 * backup.yml
 * terraform_apply.sh
 
+---
+
 ## 🔹 Futuras Mejoras
 
 * Integrar pipeline CI/CD (GitHub Actions / Jenkins).
 * Añadir monitoreo con Prometheus + Grafana mediante playbook adicional.
 * Usar Vault para cifrado de contraseñas y claves privadas.
 * Crear templates de roles reutilizables (roles/ folder).
+
+---
 
 👨‍💻 Autor: Juan R.  
 📘 Repositorio: Infra-Automation  
