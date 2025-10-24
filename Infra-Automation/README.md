@@ -107,19 +107,19 @@ backup.yml
 
 ## 🔹 Capturas
 
-
-
+  
+  
 
 
 ---
 
 ## 🔹 Archivos
 
-* inventario.yml
-* setup_linux.yml
-* deploy_web.yml
-* backup.yml
-* terraform_apply.sh
+* inventario.yml → Inventario dinámico de hosts.
+* setup_linux.yml → Configuración inicial de servidores.
+* deploy_web.yml → Despliegue de aplicación web.
+* backup.yml → Automatización de respaldos.
+* terraform_apply.sh → Integración Terraform + Ansible.
 
 ---
 
