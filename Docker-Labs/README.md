@@ -49,7 +49,7 @@ El objetivo principal es aprender a crear imágenes personalizadas, configurar r
 ## 🔹 Configuraciones Clave
 
 ### 🔸 Estructura del Proyecto
-
+**                            **
 Docker-Labs/
 ├── compose.yaml
 ├── app/
