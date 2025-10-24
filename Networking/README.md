@@ -84,7 +84,7 @@ Se implementan **VLANs**, **OSPF selectivo**, **enrutamiento estático**, **DHCP
 ---
 
 ## 🔹 Capturas
-![Topología de red](Mylab.png)
+![Topología de red](Mylab.jpg)
 
 ---
 
@@ -100,6 +100,7 @@ Se implementan **VLANs**, **OSPF selectivo**, **enrutamiento estático**, **DHCP
 
 ---
 👨‍💻 Autor: Juan R.
+
 
 
 
