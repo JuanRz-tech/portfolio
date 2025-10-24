@@ -21,19 +21,20 @@ El objetivo es desplegar instancias en **AWS y Azure**, configurar redes seguras
 
 ## 🔹 Topología General
 
-[ LAN Local ]
-│
-[pfSense / Gateway]
-│ ⇅ (VPN IPsec)
-│
-[ Cloud Gateway ]
-├── AWS VPC (10.0.10.0/24)
-│ ├── EC2 (App Server)
-│ └── S3 Bucket (Backups)
-└── Azure VNet (10.1.0.0/24)
-├── Azure VM (Web)
-└── Azure Blob Storage
+**Estructura general de conexión:**
 
+[ LAN Local ]  
+ │  
+[ pfSense / Gateway ]  
+ │ ⇅ (VPN IPsec)  
+ │  
+[ Cloud Gateway ]  
+ ├── AWS VPC (10.0.10.0/24)  
+ │ ├── EC2 (App Server)  
+ │ └── S3 Bucket (Backups)  
+ └── Azure VNet (10.1.0.0/24)  
+  ├── Azure VM (Web)  
+  └── Azure Blob Storage  
 
 ---
 
