@@ -53,18 +53,18 @@ El objetivo principal es aprender a crear imágenes personalizadas, configurar r
 Docker-Labs/
 ├── compose.yaml
 ├── app/
-│ ├── Dockerfile
-│ ├── requirements.txt
-│ └── app.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── app.py
 ├── prometheus/
-│ ├── prometheus.yml
-│ └── data/
+│   ├── prometheus.yml
+│   └── data/
 ├── grafana/
-│ └── provisioning/
-│ ├── dashboards/
-│ └── datasources/
+│   └── provisioning/
+│       ├── dashboards/
+│       └── datasources/
 ├── portainer/
-│ └── config/
+│   └── config/
 └── README.md
 
 
