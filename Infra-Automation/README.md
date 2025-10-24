@@ -70,34 +70,24 @@ all:
 ### 🔸 Playbooks
 
 setup_linux.yml
-
-Instala paquetes esenciales (net-tools, htop, git).
-
-Crea usuarios y ajusta permisos SSH.
-
-Configura timezone, hostname y actualizaciones automáticas.
+  * Instala paquetes esenciales (net-tools, htop, git).
+  * Crea usuarios y ajusta permisos SSH.
+  * Configura timezone, hostname y actualizaciones automáticas.
 
 deploy_web.yml
-
-Instala Apache/Nginx.
-
-Copia archivos web desde repositorio Git.
-
-Habilita firewall UFW con reglas HTTP/HTTPS.
+  * Instala Apache/Nginx.
+  * Copia archivos web desde repositorio Git.
+  * Habilita firewall UFW con reglas HTTP/HTTPS.
 
 backup.yml
+  * Configura backups automáticos diarios a S3 o Blob.
+  * Notifica al administrador en caso de error.
 
-Configura backups automáticos diarios a S3 o Blob.
+### 🔸 Integración con Terraform
 
-Notifica al administrador en caso de error.
-
-### 🔸 Terraform Integration
-
-Terraform se encarga del aprovisionamiento de máquinas virtuales en AWS o Azure.
-
-Ansible toma el control post-provisioning para configurar los sistemas automáticamente.
-
-Archivo de integración: terraform_apply.sh
+* Terraform se encarga del aprovisionamiento de máquinas virtuales en AWS o Azure.
+* Ansible toma el control post-provisioning para configurar los sistemas automáticamente.
+* Archivo de integración: terraform_apply.sh
 
 ## 🔹 Resultados de Pruebas
 
