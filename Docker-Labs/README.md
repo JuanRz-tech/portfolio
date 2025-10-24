@@ -55,8 +55,7 @@ Docker-Labs/
 ├── app/
 │   ├── Dockerfile
 │   ├── requirements.txt
-│   └── app.py
-├── prometheus/
+│   └── app.py├── prometheus/
 │   ├── prometheus.yml
 │   └── data/
 ├── grafana/
