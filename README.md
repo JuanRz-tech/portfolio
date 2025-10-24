@@ -1,21 +1,20 @@
-# Portfolio
-Mi portfolio profesional en redes y ciberseguridad
+# 💻 Portfolio
+Mi portfolio profesional en **Redes, Infraestructura & Cloud Engineering**
 
 # 👋 Hola, soy Juan R.
 
-Administrador de redes con experiencia en Cisco, Routing, Switching y cableado estructurado.  
-Actualmente me estoy especializando en **ciberseguridad y análisis SOC** para evolucionar mi carrera hacia la protección de infraestructuras y detección de incidentes.
+Administrador de redes con experiencia en **Cisco, Routing, Switching y cableado estructurado**.  
+Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud Engineer**, fortaleciendo conocimientos en **virtualización, contenedores, automatización e integración híbrida (on-prem + cloud)**.
 
 ---
 
 ## 📂 Proyectos Destacados
 
 ### 1. 🌐 Laboratorio de Redes Cisco
-- Configuración de equipos en Packet Tracer.
-- Implementación de una red empresarial mediana y
-   lo necesario para su correcto funsionamiento  .
-- Simulación de escenarios de acceso seguro.
-- **Repositorio / Documentación**: [Networking](Networking/README.md)
+- Configuración de equipos en Packet Tracer.  
+- Implementación de una red empresarial mediana con todos los servicios esenciales para su correcto funcionamiento.  
+- Simulación de escenarios de acceso seguro.  
+- **Repositorio / Documentación:** [Networking](Networking/README.md)
 
 ---
 
@@ -23,38 +22,74 @@ Actualmente me estoy especializando en **ciberseguridad y análisis SOC** para e
 - Implementación de un **firewall perimetral** con reglas de acceso.  
 - Configuración de políticas de seguridad y segmentación de red.  
 - Pruebas de filtrado de tráfico y control de acceso a servicios internos.  
-- **Repositorio / Documentación**: [Network Security](Network-Security/README.md)  
+- **Repositorio / Documentación:** [Network Security](Network-Security/README.md)
 
 ---
 
-### 3. 🔐 Ciberseguridad con Wazuh (SIEM + IDS/IPS)
-- Implementación de un servidor **Wazuh** para monitoreo centralizado de logs.  
-- Integración con **Suricata y Snort** para detección de intrusos y alertas en tiempo real.  
-- Simulación de un ataque de fuerza bruta y análisis de alertas.  
-- Dashboard con métricas de seguridad y correlación de eventos.  
-- **Repositorio / Documentación**: [Wazuh-SIEM](Wazuh-SIEM/README.md)  
-
----
-
-### 4. 🐧 Administración de Sistemas Linux
+### 3. 🐧 Administración de Sistemas Linux
 - Instalación y configuración básica de servidores en Linux (Ubuntu/Debian).  
 - Configuración de **servicios de red**: SSH, Apache/Nginx, DHCP, DNS.  
 - Prácticas de **hardening**: gestión de usuarios, permisos y firewall (UFW/iptables).  
-- **Repositorio / Documentación**: [Linux-Servers](Linux-Servers/README.md)  
+- **Repositorio / Documentación:** [Linux-Servers](Linux-Servers/README.md)
 
 ---
 
-### 5. 🐍 Automatización de Redes con Python
+### 4. 🐍 Automatización de Redes con Python
 - Script para hacer **backup automático de configuraciones Cisco vía SSH**.  
 - Reducción de tiempo en tareas repetitivas de administración.  
-- **Repositorio / Script**: [Python-Networking](Python-Networking/README.md)  
+- **Repositorio / Script:** [Python-Networking](Python-Networking/README.md)
+
+---
+
+### 5. 🧩 Laboratorio de Infraestructura Empresarial
+- Implementación de topología híbrida con VLANs, routing dinámico y ACLs.  
+- Integración entre entornos virtualizados (VMware / Proxmox) y nube (AWS).  
+- Segmentación de red, alta disponibilidad y documentación completa.  
+- **Repositorio / Documentación:** [Infraestructura Empresarial](Infraestructura-Empresarial/README.md)
+
+---
+
+### 6. ☁️ Despliegue Cloud (AWS / Azure)
+- Creación de instancias EC2 y Azure VM con redes virtuales seguras (VPC/VNet).  
+- Configuración de VPN site-to-site entre laboratorio local y nube.  
+- Gestión de reglas de seguridad, subredes privadas y backups automatizados.  
+- **Repositorio / Documentación:** [Cloud-Labs](Cloud-Labs/README.md)
+
+---
+
+### 7. ⚙️ Automatización de Infraestructura con Ansible
+- Playbooks para configurar servidores Linux automáticamente.  
+- Inventario dinámico para despliegue de entornos híbridos.  
+- Integración con Terraform para aprovisionamiento en la nube.  
+- **Repositorio / Documentación:** [Infra-Automation](Infra-Automation/README.md)
+
+---
+
+### 8. 🐳 Docker & Contenedores
+- Creación de imágenes personalizadas y despliegue de servicios con **Docker Compose**.  
+- Configuración de redes internas entre contenedores y persistencia con volúmenes.  
+- Monitoreo básico con **Portainer** y métricas con **Grafana + Prometheus**.  
+- **Repositorio / Documentación:** [Docker-Labs](Docker-Labs/README.md)
 
 ---
 
 ## 🎓 Formación y Certificaciones
 - **CCNA (en progreso)**  
-- Cursos de ciberseguridad en Platzi, Udemy y TryHackMe  
-- Laboratorios prácticos en redes y seguridad  
+- **AWS Cloud Practitioner** (en preparación)  
+- **Ansible & Terraform Fundamentals**  
+- Cursos de **Linux, virtualización y ciberseguridad** en Platzi, Udemy y TryHackMe  
+- Laboratorios prácticos de redes, cloud y automatización  
+
+---
+
+## 🚀 Habilidades Técnicas
+
+**Infraestructura:** Linux, Proxmox, VMware, pfSense, Fortinet  
+**Cloud:** AWS, Azure, Terraform, Ansible  
+**Contenedores:** Docker, Docker Compose  
+**Redes:** VLANs, Routing, ACLs, VPN, DHCP, DNS  
+**Automatización:** Python, Bash, PowerShell, YAML  
+**Monitoreo:** Grafana, Prometheus, Wazuh  
 
 ---
 
