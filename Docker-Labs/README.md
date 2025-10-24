@@ -186,9 +186,9 @@ networks:
 
 ---
 
-👨‍💻 Autor: Juan R.
-📘 Repositorio: Docker-Labs
-🗓️ Versión: 1.0
+👨‍💻 Autor: Juan R.  
+📘 Repositorio: Docker-Labs  
+🗓️ Versión: 1.0  
 
 
 
