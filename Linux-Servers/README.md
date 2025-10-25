@@ -10,7 +10,7 @@ El laboratorio combina la gestión manual de servicios con automatización bási
 ---
 
 ## 🔹 Entorno
-📌 **Sistema operativo:** Ubuntu Server 22.04 LTS / Debian 12  
+📌 **Sistema operativo:** Ubuntu Server 22.04 LTS / Debian 13  
 📌 **Entorno de ejecución:** Proxmox, VMware o VirtualBox  
 📌 **Red configurada:** 192.168.10.0/24  
 📌 **Hostname:** srv-linux01  
