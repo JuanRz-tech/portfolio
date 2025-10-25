@@ -89,7 +89,7 @@ Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud
 **Contenedores:** Docker, Docker Compose  
 **Redes:** VLANs, Routing, ACLs, VPN, DHCP, DNS  
 **Automatización:** Python, Bash, PowerShell, YAML  
-**Monitoreo:** Grafana, Prometheus, Wazuh  
+**Monitoreo:** Grafana, Prometheus  
 
 ---
 
