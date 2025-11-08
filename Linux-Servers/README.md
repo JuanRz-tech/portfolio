@@ -1,4 +1,4 @@
-# 🐧 Laboratorio de Administración de Sistemas Linux - Ubuntu/Debian
+# 🐧 Laboratorio de Administración de Sistemas Linux - Debian
 
 ## 🔹 Descripción
 Este laboratorio forma parte del entorno de prácticas de **Infraestructura & Cloud Engineering**.  
@@ -10,8 +10,8 @@ El laboratorio combina la gestión manual de servicios con automatización bási
 ---
 
 ## 🔹 Entorno
-📌 **Sistema operativo:** Ubuntu Server 22.04 LTS / Debian 13  
-📌 **Entorno de ejecución:** Proxmox, VMware o VirtualBox  
+📌 **Sistema operativo:** Debian 13  
+📌 **Entorno de ejecución:** GNS3  
 📌 **Red configurada:** 192.168.10.0/24  
 📌 **Hostname:** srv-linux01  
 📌 **Usuario administrador:** sysadmin  
@@ -24,7 +24,7 @@ El laboratorio combina la gestión manual de servicios con automatización bási
 | Servicio | Función | Detalles |
 |-----------|----------|----------|
 | **SSH (OpenSSH)** | Acceso remoto seguro | Autenticación por clave, puerto 22, acceso limitado por usuario |
-| **Apache2 / Nginx** | Servidor web | Página de prueba y virtual host configurado |
+| **Nginx** | Servidor web | Página de prueba y virtual host configurado |
 | **DHCP (isc-dhcp-server)** | Asignación automática de IP | Rango 192.168.10.50–100, gateway y DNS definidos |
 | **DNS (Bind9)** | Resolución de nombres local | Zona `empresa.local` y resolución inversa |
 | **NTP (Chrony)** | Sincronización horaria | Configuración con servidor pool.ntp.org |
@@ -36,7 +36,7 @@ El laboratorio combina la gestión manual de servicios con automatización bási
 ## 🔹 Configuraciones Clave
 
 1. **Red e interfaz**
-   - IP estática configurada en `/etc/netplan/`.
+   - IP estática configurada en `/etc/systemd/network/`.
    - Gateway: 192.168.10.1, DNS: 8.8.8.8 / 192.168.10.10.  
    - Hostname configurado en `/etc/hostname` y `/etc/hosts`.
 
@@ -45,7 +45,7 @@ El laboratorio combina la gestión manual de servicios con automatización bási
    - Deshabilitado el acceso directo de `root`.  
    - Claves públicas y privadas almacenadas en `/home/sysadmin/.ssh`.
 
-3. **Apache / Nginx**
+3. **Nginx**
    - Sitio web funcional alojado en `/var/www/html`.  
    - Permisos ajustados con usuario de servicio `www-data`.
 
