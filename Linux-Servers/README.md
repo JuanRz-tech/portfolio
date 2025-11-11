@@ -80,15 +80,22 @@ El laboratorio combina la gestión manual de servicios con automatización bási
 ---
 
 ## 🔹 Capturas
-![Configuración de red](screenshots/netplan_config.png)
-![Página web local](screenshots/apache_index.png)
-![Firewall activo](screenshots/ufw_status.png)
+![Topologia GNS3](topologia-gns3.png)
+![Configuración de red](config-red.png)
+![Página web local](servicio-web.png)
+![Firewall activo](ufw.png)
+![Servidor DHCP](servicio-dhcp.png)
+![Servicio DNS](servicio-dns.png)
+![Servidor NTP](servicio-ntp.png)
+![Acceso ssh empleando claves](ssh-id.png)
+![Conectividad desde cliente Windows](client-win-conectividad.png)
+![Conectividad desde cliente Linux](client-linux-conectividad.png)
 
 ---
 
 ## 🔹 Archivos
-- [configuraciones.txt](configuraciones.txt) → Detalles de comandos y configuraciones aplicadas.  
-- [lab-linux.sh](lab-linux.sh) → Script de automatización para setup inicial.  
+- [configuraciones.txt](server-config.txt) → Detalles de comandos y configuraciones aplicadas.  
+- [lab-linux.sh](automatic-install-server-linux.txt) → Script de automatización para setup inicial.  
 - [hardening_checklist.md](hardening_checklist.md) → Guía de endurecimiento y verificación.  
 
 ---
