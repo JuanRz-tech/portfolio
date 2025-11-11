@@ -81,18 +81,30 @@ El laboratorio combina la gestión manual de servicios con automatización bási
 
 ## 🔹 Capturas
 
-| **Vista** | **Descripción** |
-|:--:|:--|
-| ![Topología GNS3](topologia-gns3.png) | **Topología GNS3** |
-| ![Configuración de red](config-red.png) | **Configuración de red** |
-| ![Página web local](servicio-web.png) | **Página web local** |
-| ![Firewall activo](ufw.png) | **Firewall activo** |
-| ![Servidor DHCP](servicio-dhcp.png) | **Servidor DHCP** |
-| ![Servicio DNS](servicio-dns.png) | **Servicio DNS** |
-| ![Servidor NTP](servicio-ntp.png) | **Servidor NTP** |
-| ![Acceso SSH por clave](ssh-id.png) | **Acceso SSH empleando claves** |
-| ![Conectividad desde cliente Windows](client-win-conectividad.png) | **Conectividad desde cliente Windows** |
-| ![Conectividad desde cliente Linux](client-linux-conectividad.png) | **Conectividad desde cliente Linux** |
+<div align="center">
+
+| ![Topología GNS3](topologia-gns3.png) | ![Configuración de red](config-red.png) |
+|:--:|:--:|
+| 🧭 *Topología GNS3* | 🌐 *Configuración de red* |
+
+| ![Página web local](servicio-web.png) | ![Firewall activo](ufw.png) |
+|:--:|:--:|
+| 💻 *Página web local* | 🔥 *Firewall activo* |
+
+| ![Servidor DHCP](servicio-dhcp.png) | ![Servicio DNS](servicio-dns.png) |
+|:--:|:--:|
+| 🧩 *Servidor DHCP* | 📡 *Servicio DNS* |
+
+| ![Servidor NTP](servicio-ntp.png) | ![Acceso SSH por clave](ssh-id.png) |
+|:--:|:--:|
+| ⏱ *Servidor NTP* | 🔑 *Acceso SSH empleando claves* |
+
+| ![Cliente Windows](client-win-conectividad.png) | ![Cliente Linux](client-linux-conectividad.png) |
+|:--:|:--:|
+| 🪟 *Conectividad desde cliente Windows* | 🐧 *Conectividad desde cliente Linux* |
+
+</div>
+
 
 
 ---
