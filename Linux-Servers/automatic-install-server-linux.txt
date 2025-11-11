@@ -1,0 +1,156 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ========= Variables =========
+HOSTNAME_FQDN="srv-linux01.empresa.local"
+HOSTNAME_SHORT="srv-linux01"
+DOMAIN="empresa.local"
+LAN_NET="192.168.10.0/24"
+SRV_IP="192.168.10.10"
+GATEWAY="192.168.10.1"
+DNS1="192.168.10.10"
+DNS2="8.8.8.8"
+DHCP_START="192.168.10.50"
+DHCP_END="192.168.10.100"
+IFACE="ens3"   # ⚠️ cambia si tu interfaz es otra
+
+# ========= Helpers =========
+log(){ echo -e "\n[+] $*"; }
+file_has(){ grep -qE "$2" "$1" 2>/dev/null || return 1; }
+install(){ command -v "$1" >/dev/null 2>&1 || apt-get install -y "$2"; }
+
+# ========= Pre =========
+log "Actualizando índices APT" && apt-get update -y
+
+# Hostname y hosts
+log "Configurando hostname y /etc/hosts"
+echo "$HOSTNAME_SHORT" >/etc/hostname
+hostnamectl set-hostname "$HOSTNAME_SHORT"
+if ! file_has /etc/hosts "${SRV_IP}[[:space:]]+${HOSTNAME_FQDN}"; then
+  printf "%s  %s %s\n" "$SRV_IP" "$HOSTNAME_FQDN" "$HOSTNAME_SHORT" >>/etc/hosts
+fi
+
+# OpenSSH
+log "Instalando y endureciendo OpenSSH"
+install sshd openssh-server
+sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config || true
+sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config || true
+if ! file_has /etc/ssh/sshd_config "^AllowUsers \\bsysadmin\\b"; then echo "AllowUsers sysadmin" >>/etc/ssh/sshd_config; fi
+if ! file_has /etc/ssh/sshd_config "^ClientAliveInterval \\b"; then echo -e "ClientAliveInterval 300\nClientAliveCountMax 2" >>/etc/ssh/sshd_config; fi
+systemctl enable --now ssh || systemctl restart ssh
+
+# UFW
+log "Configurando UFW"
+install ufw ufw
+ufw --force reset
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow 22/tcp
+ufw allow 80/tcp
+ufw allow 53/tcp
+ufw allow 53/udp
+ufw allow 123/udp
+ufw --force enable
+ufw status verbose || true
+
+# Web (Nginx)
+log "Instalando Nginx"
+install nginx nginx
+systemctl enable --now nginx
+if [ ! -f /var/www/html/index.html ]; then
+echo "<h1>OK - ${HOSTNAME_SHORT}</h1>" >/var/www/html/index.html
+fi
+chown -R www-data:www-data /var/www/html
+
+# DHCP
+log "Instalando y configurando isc-dhcp-server"
+install dhcpd isc-dhcp-server
+sed -i "s/^INTERFACESv4=.*/INTERFACESv4=\"${IFACE}\"/" /etc/default/isc-dhcp-server || true
+cat >/etc/dhcp/dhcpd.conf <<EOF
+default-lease-time 600;
+max-lease-time 7200;
+option domain-name "${DOMAIN}";
+option domain-name-servers ${DNS1}, ${DNS2};
+subnet 192.168.10.0 netmask 255.255.255.0 {
+  range ${DHCP_START} ${DHCP_END};
+  option routers ${GATEWAY};
+  option broadcast-address 192.168.10.255;
+}
+EOF
+systemctl enable --now isc-dhcp-server
+
+# DNS (Bind9)
+log "Instalando y configurando Bind9"
+install named bind9
+install rndc bind9-utils
+
+cat >/etc/bind/named.conf.options <<EOF
+options {
+  directory "/var/cache/bind";
+  recursion yes;
+  allow-recursion { ${LAN_NET}; };
+  listen-on { ${SRV_IP}; 127.0.0.1; };
+  forwarders { ${DNS2}; };
+  dnssec-validation auto;
+};
+EOF
+
+mkdir -p /etc/bind/zones
+
+cat >/etc/bind/named.conf.local <<EOF
+zone "${DOMAIN}" {
+  type master;
+  file "/etc/bind/zones/db.${DOMAIN}";
+};
+zone "10.168.192.in-addr.arpa" {
+  type master;
+  file "/etc/bind/zones/db.10.168.192";
+};
+EOF
+
+SERIAL=$(date +%Y%m%d01)
+
+# Archivo de zona directa
+cat >/etc/bind/zones/db.${DOMAIN} <<'EOF'
+$TTL 86400
+@ IN SOA srv-linux01.empresa.local. admin.empresa.local. (
+  2025010101 3600 1800 1209600 86400 )
+  IN NS srv-linux01.empresa.local.
+srv-linux01 IN A 192.168.10.10
+www IN CNAME srv-linux01
+EOF
+
+# Archivo de zona inversa
+cat >/etc/bind/zones/db.10.168.192 <<'EOF'
+$TTL 86400
+@ IN SOA srv-linux01.empresa.local. admin.empresa.local. (
+  2025010101 3600 1800 1209600 86400 )
+  IN NS srv-linux01.empresa.local.
+10 IN PTR srv-linux01.empresa.local.
+EOF
+
+named-checkconf
+named-checkzone ${DOMAIN} /etc/bind/zones/db.${DOMAIN}
+named-checkzone 10.168.192.in-addr.arpa /etc/bind/zones/db.10.168.192
+systemctl enable --now bind9
+systemctl restart named
+
+
+# NTP (Chrony)
+log "Instalando y configurando Chrony"
+install chronyd chrony
+sed -i 's/^pool.*/pool pool.ntp.org iburst/' /etc/chrony/chrony.conf || true
+if ! file_has /etc/chrony/chrony.conf "^allow "; then echo "allow ${LAN_NET}" >>/etc/chrony/chrony.conf; fi
+if ! file_has /etc/chrony/chrony.conf "^local stratum 10"; then echo "local stratum 10" >>/etc/chrony/chrony.conf; fi
+systemctl enable --now chrony
+
+# Usuarios
+log "Creando usuarios y grupos"
+id -u sysadmin >/dev/null 2>&1 || adduser --disabled-password --gecos "" sysadmin
+usermod -aG sudo sysadmin || true
+id -u webuser >/dev/null 2>&1 || adduser --disabled-password --shell /usr/sbin/nologin --gecos "" webuser
+usermod -aG www-data webuser || true
+id -u guest >/dev/null 2>&1 || adduser --disabled-password --gecos "" guest
+passwd -l guest || true
+
+log "✅ Listo. Servicios activos: SSH, Nginx, DHCP, Bind9, Chrony, UFW"
