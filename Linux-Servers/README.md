@@ -80,7 +80,7 @@ El laboratorio combina la gestión manual de servicios con automatización bási
 ---
 
 ## 🔹 Capturas
-![Topologia GNS3](topologia-gns3.png)
+![Topologia GNS3](topologia-gns3.png) - Topologia GNS3.
 ![Configuración de red](config-red.png)
 ![Página web local](servicio-web.png)
 ![Firewall activo](ufw.png)
