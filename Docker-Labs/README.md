@@ -1,18 +1,26 @@
-# 🐳 Laboratorio de Docker & Contenedores
+# 🐳 Laboratorio de Docker, Contenedores & n8n
 
 ## 🔹 Descripción
-Este laboratorio forma parte del plan de formación en **Infraestructura & Cloud Engineering**, enfocado en la **implementación, despliegue y monitoreo de servicios en contenedores**.  
-El objetivo principal es aprender a crear imágenes personalizadas, configurar redes internas entre contenedores, definir volúmenes persistentes y desplegar múltiples servicios usando **Docker Compose**, con monitoreo integrado mediante **Portainer, Grafana y Prometheus**.
+Este laboratorio forma parte del plan de formación en Infraestructura & Cloud Engineering, enfocado en la automatización, implementación, despliegue y monitoreo de servicios en contenedores.
+El objetivo principal es construir un entorno completo de transcripción, workflow y asistente RAG, donde se aprende a:
+
+* Crear imágenes personalizadas para servicios web y bases de datos.
+* Configurar redes internas y volúmenes persistentes en Docker.
+* Desplegar múltiples servicios con Docker Compose.
+* Automatizar workflows de ingestión de audio y video con n8n.
+* Implementar un asistente RAG que utiliza modelos locales y embeddings.
+* Monitorear el entorno con Portainer, Prometheus y Grafana.
 
 ---
 
 ## 🔹 Entorno
 
-📌 **Plataforma principal:** Docker Engine 25+ / Docker Compose V2  
-📌 **Sistema operativo:** Ubuntu Server 22.04 LTS / Debian 12  
-📌 **Monitoreo:** Portainer, Prometheus y Grafana  
-📌 **Red:** Bridge personalizada con DNS interno  
-📌 **Repositorio:** `Docker-Labs`  
+📌 Plataforma principal: Docker Engine 25+ / Docker Compose V2
+📌 Sistema operativo: Debian 13
+📌 Monitoreo: Portainer, Grafana + Prometheus
+📌 Red: Bridge personalizada (my_server)
+📌 Workflow: n8n (host local)
+📌 Repositorio: Docker-Labs  
 
 ---
 
@@ -20,29 +28,34 @@ El objetivo principal es aprender a crear imágenes personalizadas, configurar r
 
 **Diagrama lógico del entorno de contenedores:**
 
-[ Host Linux ]  
+[ Host Linux / Debian ]  
 │  
-├── Red Docker (bridge: `infra_net`)  
-│     ├── nginx_container → Proxy / Frontend  
-│     ├── app_container → Aplicación principal  
-│     ├── db_container → Base de datos (MySQL / PostgreSQL)  
-│     ├── prometheus_container → Recolección de métricas  
-│     ├── grafana_container → Visualización de métricas  
-│     └── portainer_container → Administración visual  
+├── Red Docker (bridge: `my_server`)  
+│     ├── postgres → PostgreSQL + pgvector  
+│     ├── ollama → Modelos locales y embeddings  
+│     ├── audio_extractor → Microservicio extracción audio  
+│     ├── ffmpeg → Procesamiento multimedia  
+│     ├── python-utils → Utilidades Python  
+│     ├── backend_api → API principal  
+│     ├── frontend_app → Interfaz web  
+│     └── portainer → Administración visual contenedores  
+│  
+├── n8n → (Ejecutado en host, fuera de Docker)  
 │  
 └── Volúmenes persistentes  
-      ├── db_data  
-      ├── grafana_data  
-      └── prometheus_data  
+      ├── db_data → PostgreSQL  
+      ├── ollama_data → Modelos Ollama  
+      └── portainer_data → Configuración Portainer 
 
 ---
 
 ## 🔹 Objetivos del Laboratorio
-- Crear **imágenes personalizadas** para servicios web y bases de datos.  
-- Desplegar múltiples contenedores con **Docker Compose**.  
-- Configurar **redes internas y volúmenes persistentes**.  
-- Implementar **monitoreo básico con Portainer y Prometheus + Grafana**.  
-- Documentar y automatizar la ejecución del entorno completo.  
+* Crear imágenes personalizadas para servicios web, microservicios y bases de datos.
+* Desplegar múltiples contenedores con Docker Compose.
+* Configurar redes internas y volúmenes persistentes.
+* Automatizar workflows de ingestión de contenido multimedia con n8n.
+* Implementar un asistente RAG que responde consultas usando embeddings locales.
+* Documentar y monitorear la ejecución del entorno completo.  
 
 ---
 
@@ -84,22 +97,55 @@ services:
     networks:
       - infra_net
     depends_on:
-      - app
+      - backend_api
 
-  app:
+  backend_api:
     build: ./app
-    container_name: web_app
+    container_name: backend_api
+    networks:
+      - infra_net
+    environment:
+      - DATABASE_URL=postgresql://postgres:admin123@db:5432/labdb
+
+  frontend_app:
+    build: ./frontend
+    container_name: frontend_app
+    networks:
+      - infra_net
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend_api
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: labdb
+    volumes:
+      - db_data:/var/lib/postgresql/data
     networks:
       - infra_net
 
-  db:
-    image: mysql:8.0
-    container_name: mysql_db
-    environment:
-      MYSQL_ROOT_PASSWORD: admin123
-      MYSQL_DATABASE: labdb
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama_srv
     volumes:
-      - db_data:/var/lib/mysql
+      - ollama_data:/ollama
+    networks:
+      - infra_net
+
+  audio_extractor:
+    build: ./microservices/audio_extractor
+    container_name: audio_extractor
+    networks:
+      - infra_net
+
+  ffmpeg:
+    build: ./microservices/ffmpeg
+    container_name: ffmpeg_srv
     networks:
       - infra_net
 
@@ -136,34 +182,48 @@ volumes:
   db_data:
   grafana_data:
   prometheus_data:
+  ollama_data:
+  portainer_data:
 
 networks:
   infra_net:
     driver: bridge
 
+
 ```
+---
+
+🔹 Endpoints del Backend
+Método   Endpoint	            Descripción
+GET	 /api/videos	   Listado de videos cargados
+GET	 /api/videos/{id}	   Detalle de un video
+POST	 /api/transcribe	   Transcribir audio/video
+POST	 /api/embedding	   Generar embeddings de texto/audio
+POST	 /api/rag/query	   Consultar asistente RAG
+
+---
+
+## 🔹 Integración con n8n
+* Workflows automatizados de ingestión de contenido (Drive, S3, Carpetas locales).
+* Llamadas a backend_api para transcripción, procesamiento y generación de embeddings.
+* Trigger por carpeta o por webhook.
+* Logging y notificaciones al finalizar procesos.
 
 ---
 
 ## 🔹 Resultados de Pruebas
 
 ✅ Contenedores desplegados correctamente con docker compose up -d.
-
-✅ Acceso web a Portainer (http://localhost:9000).
-
-✅ Aplicación web accesible en http://localhost.
-
+✅ Acceso web a Portainer: http://localhost:9000.
+✅ Frontend accesible en http://localhost.
+✅ Endpoints de transcripción, embeddings y RAG funcionando.
 ✅ Prometheus recolectando métricas de contenedores activos.
-
-✅ Panel de Grafana con dashboard de monitoreo funcional.
-
-✅ Volúmenes persistentes mantienen los datos tras reinicios.
-
+✅ Grafana mostrando dashboards de monitoreo funcional.
+✅ Volúmenes persistentes mantienen datos tras reinicios.
 
 ---
 
 ## 🔹 Capturas
-
 
 
 
