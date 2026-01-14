@@ -194,12 +194,12 @@ networks:
 ---
 
 🔹 Endpoints del Backend
-Método   Endpoint	            Descripción
-GET	 /api/videos	   Listado de videos cargados
-GET	 /api/videos/{id}	   Detalle de un video
-POST	 /api/transcribe	   Transcribir audio/video
-POST	 /api/embedding	   Generar embeddings de texto/audio
-POST	 /api/rag/query	   Consultar asistente RAG
+Método   Endpoint	            Descripción  
+GET	 /api/videos	   Listado de videos cargados  
+GET	 /api/videos/{id}	   Detalle de un video  
+POST	 /api/transcribe	   Transcribir audio/video  
+POST	 /api/embedding	   Generar embeddings de texto/audio  
+POST	 /api/rag/query	   Consultar asistente RAG     
 
 ---
 
