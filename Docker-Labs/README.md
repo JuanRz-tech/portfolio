@@ -15,12 +15,12 @@ El objetivo principal es construir un entorno completo de transcripción, workfl
 
 ## 🔹 Entorno
 
-📌 Plataforma principal: Docker Engine 25+ / Docker Compose V2 
-📌 Sistema operativo: Debian 13 
-📌 Monitoreo: Portainer, Grafana + Prometheus 
-📌 Red: Bridge personalizada (my_server) 
-📌 Workflow: n8n (host local) 
-📌 Repositorio: Docker-Labs   
+📌 Plataforma principal: Docker Engine 25+ / Docker Compose V2  
+📌 Sistema operativo: Debian 13  
+📌 Monitoreo: Portainer, Grafana + Prometheus  
+📌 Red: Bridge personalizada (my_server)  
+📌 Workflow: n8n (host local)  
+📌 Repositorio: Docker-Labs     
 
 ---
 
