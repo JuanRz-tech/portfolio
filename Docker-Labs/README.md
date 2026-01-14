@@ -194,7 +194,7 @@ networks:
 ---
 
 🔹 Endpoints del Backend
-Método   Endpoint	            Descripción  
+Método -   Endpoint -	    Descripción  
 GET	 /api/videos	   Listado de videos cargados  
 GET	 /api/videos/{id}	   Detalle de un video  
 POST	 /api/transcribe	   Transcribir audio/video  
