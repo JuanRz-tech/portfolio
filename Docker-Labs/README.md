@@ -213,13 +213,13 @@ POST	 /api/rag/query	   Consultar asistente RAG
 
 ## 🔹 Resultados de Pruebas
 
-✅ Contenedores desplegados correctamente con docker compose up -d.
-✅ Acceso web a Portainer: http://localhost:9000.
-✅ Frontend accesible en http://localhost.
-✅ Endpoints de transcripción, embeddings y RAG funcionando.
-✅ Prometheus recolectando métricas de contenedores activos.
-✅ Grafana mostrando dashboards de monitoreo funcional.
-✅ Volúmenes persistentes mantienen datos tras reinicios.
+✅ Contenedores desplegados correctamente con docker compose up -d.  
+✅ Acceso web a Portainer: http://localhost:9000.  
+✅ Frontend accesible en http://localhost.  
+✅ Endpoints de transcripción, embeddings y RAG funcionando.  
+✅ Prometheus recolectando métricas de contenedores activos.  
+✅ Grafana mostrando dashboards de monitoreo funcional.  
+✅ Volúmenes persistentes mantienen datos tras reinicios.  
 
 ---
 
@@ -230,19 +230,19 @@ POST	 /api/rag/query	   Consultar asistente RAG
 ---
 
 ##🔹 Archivos
-* compose.yaml → Archivo principal de orquestación.
-* Dockerfile  → Imagen personalizada para la aplicación web.
-* prometheus.yml → Configuración de monitoreo.
-* grafana_dashboards → Dashboards personalizados.
-* scripts/start_lab.sh → Script de despliegue automatizado.
+* compose.yaml → Archivo principal de orquestación.  
+* Dockerfile  → Imagen personalizada para la aplicación web.  
+* prometheus.yml → Configuración de monitoreo.  
+* grafana_dashboards → Dashboards personalizados.  
+* scripts/start_lab.sh → Script de despliegue automatizado.  
 
 ---
 
 ## 🔹 Futuras Mejoras
-* Implementar autenticación con Traefik + Let's Encrypt.
-* Integrar alertas con Prometheus Alertmanager.
-* Añadir logs centralizados con Loki y Promtail.
-* Desplegar el entorno mediante Terraform + Ansible para CI/CD.
+* Implementar autenticación con Traefik + Let's Encrypt.  
+* Integrar alertas con Prometheus Alertmanager.  
+* Añadir logs centralizados con Loki y Promtail.  
+* Desplegar el entorno mediante Terraform + Ansible para CI/CD.  
 
 ---
 
