@@ -119,7 +119,7 @@ Ejemplos:
 * backend_api → audio_extractor:5000  
 
 ### 🔸 Volúmenes Persistentes
-Volumen---------Uso
+Volumen---------Uso  
 db_data---------Datos PostgreSQL + pgvector  
 ollama_data-----Modelos y embeddings  
 portainer_data--Configuración Portainer  
