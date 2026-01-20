@@ -202,105 +202,60 @@ Define los servicios, redes y volúmenes persistentes.
 version: "3.9"
 
 services:
-  nginx:
-    image: nginx:latest
-    container_name: nginx_proxy
+  portainer:
+    image: portainer/portainer-ce
     ports:
-      - "80:80"
-    networks:
-      - infra_net
-    depends_on:
-      - backend_api
+      - "9000:9000"
 
-  backend_api:
-    build: ./app
-    container_name: backend_api
-    networks:
-      - infra_net
+  postgres:
+    image: pgvector/pg16
+    ports:
+      - "5432:5432"
     environment:
-      - DATABASE_URL=postgresql://postgres:admin123@db:5432/labdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: ********
+      POSTGRES_DB: n8n
 
   frontend_app:
     build: ./frontend
-    container_name: frontend_app
-    networks:
-      - infra_net
     ports:
-      - "5173:5173"
-    depends_on:
-      - backend_api
+      - "8080:80"
 
-  db:
-    image: postgres:15
-    container_name: postgres_db
+  backend_api:
+    build: ./backend
+    ports:
+      - "8000:8000"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: labdb
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    networks:
-      - infra_net
-
-  ollama:
-    image: ollama/ollama:latest
-    container_name: ollama_srv
-    volumes:
-      - ollama_data:/ollama
-    networks:
-      - infra_net
-
-  audio_extractor:
-    build: ./microservices/audio_extractor
-    container_name: audio_extractor
-    networks:
-      - infra_net
-
-  ffmpeg:
-    build: ./microservices/ffmpeg
-    container_name: ffmpeg_srv
-    networks:
-      - infra_net
+      DATABASE_URL: postgresql://admin:********@postgres:5432/n8n
 
   prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus_srv
-    volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
-    networks:
-      - infra_net
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
 
   grafana:
-    image: grafana/grafana:latest
-    container_name: grafana_srv
+    image: grafana/grafana
     ports:
       - "3000:3000"
-    volumes:
-      - grafana_data:/var/lib/grafana
-    networks:
-      - infra_net
 
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer_srv
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
     ports:
-      - "9000:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - infra_net
+      - "8081:8080"
 
-volumes:
-  db_data:
-  grafana_data:
-  prometheus_data:
-  ollama_data:
-  portainer_data:
+  node_exporter:
+    image: prom/node-exporter
+    ports:
+      - "9100:9100"
+
+  audio_extractor:
+    build: ./audio_extractor
+    ports:
+      - "5000:5000"
 
 networks:
-  infra_net:
-    driver: bridge
+  my_server:
+    external: true
 
 
 ```
@@ -340,6 +295,34 @@ networks:
 ---
 
 ## 🔹 Capturas
+
+### 🧰 Portainer
+Captura de la interfaz de administración de contenedores.  
+
+![Portainer - Dashboard](ruta/a/tu/imagen-portainer-dashboard.png)
+
+---
+
+### 🔄 n8n - Workflows  
+
+![n8n - Workflow](ruta/a/tu/imagen-n8n-workflow.png)
+
+---
+
+### 📊 Grafana - Dashboards
+Capturas de los dashboards de métricas.
+
+![Grafana - Dashboard 1](ruta/a/tu/imagen-grafana-dashboard1.png)
+
+![Grafana - Dashboard 2](ruta/a/tu/imagen-grafana-dashboard2.png)
+
+---
+
+### 🌐 Web App
+Capturas de la aplicación web en funcionamiento.
+
+![Web App - Home](ruta/a/tu/imagen-web-home.png)
+
 
 
 
