@@ -28,63 +28,63 @@ El objetivo principal es construir un entorno completo de transcripción, workfl
 
 **Diagrama lógico del entorno de contenedores**
 
-[ Host Linux / Debian 13 ]
-│
-├── Docker Network (bridge: `my_server`)
-│   │
-│   ├── postgres
-│   │     └── PostgreSQL + pgvector (embeddings RAG)
-│   │
-│   ├── ollama
-│   │     └── Modelos LLM locales + embeddings
-│   │
-│   ├── audio_extractor
-│   │     └── Extracción de audio desde video
-│   │
-│   ├── ffmpeg
-│   │     └── Procesamiento multimedia
-│   │
-│   ├── python-utils
-│   │     └── Scripts de transcripción y parsing
-│   │
-│   ├── backend_api
-│   │     └── API principal (Transcripción + RAG)
-│   │
-│   ├── frontend_app
-│   │     └── Interfaz web de consultas y resultados
-│   │
-│   ├── portainer
-│   │     └── Administración visual de contenedores
-│   │
-│   ├── prometheus
-│   │     └── Recolección de métricas
-│   │
-│   ├── grafana
-│   │     └── Dashboards y visualización
-│   │
-│   ├── cadvisor
-│   │     └── Métricas de contenedores
-│   │
-│   └── node_exporter
-│         └── Métricas del host
-│
-├── n8n (Host)
-│   └── Orquestación de workflows
-│        • Ingesta de video/audio
-│        • Llamadas a backend_api
-│        • Automatización end-to-end
-│
-└── Volúmenes persistentes
-    │
-    ├── db_data
-    │     └── Datos PostgreSQL
-    │
-    ├── ollama_data
-    │     └── Modelos y embeddings
-    │
-    └── portainer_data
-          └── Configuración Portainer
-
+[ Host Linux / Debian 13 ]  
+│  
+├── Docker Network (bridge: `my_server`)  
+│   │  
+│   ├── postgres  
+│   │     └── PostgreSQL + pgvector (embeddings RAG)  
+│   │  
+│   ├── ollama  
+│   │     └── Modelos LLM locales + embeddings  
+│   │  
+│   ├── audio_extractor  
+│   │     └── Extracción de audio desde video  
+│   │  
+│   ├── ffmpeg  
+│   │     └── Procesamiento multimedia  
+│   │  
+│   ├── python-utils  
+│   │     └── Scripts de transcripción y parsing  
+│   │  
+│   ├── backend_api  
+│   │     └── API principal (Transcripción + RAG)  
+│   │  
+│   ├── frontend_app  
+│   │     └── Interfaz web de consultas y resultados  
+│   │  
+│   ├── portainer  
+│   │     └── Administración visual de contenedores  
+│   │  
+│   ├── prometheus  
+│   │     └── Recolección de métricas  
+│   │  
+│   ├── grafana  
+│   │     └── Dashboards y visualización  
+│   │  
+│   ├── cadvisor  
+│   │     └── Métricas de contenedores  
+│   │  
+│   └── node_exporter  
+│         └── Métricas del host  
+│  
+├── n8n (Host)  
+│   └── Orquestación de workflows  
+│        • Ingesta de video/audio  
+│        • Llamadas a backend_api  
+│        • Automatización end-to-end  
+│  
+└── Volúmenes persistentes  
+    │  
+    ├── db_data  
+    │     └── Datos PostgreSQL  
+    │  
+    ├── ollama_data  
+    │     └── Modelos y embeddings  
+    │  
+    └── portainer_data  
+          └── Configuración Portainer  
+  
 
 ---
 
