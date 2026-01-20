@@ -1,4 +1,4 @@
-# 🐳 Laboratorio de Docker, Contenedores & n8n
+# 🐳 Laboratorio de Docker, Contenedores, n8n & Asistente RAG
 
 ## 🔹 Descripción
 Este laboratorio forma parte del plan de formación en Infraestructura & Cloud Engineering, enfocado en la automatización, implementación, despliegue y monitoreo de servicios en contenedores.
@@ -17,10 +17,10 @@ El objetivo principal es construir un entorno completo de transcripción, workfl
 
 📌 Plataforma principal: Docker Engine 25+ / Docker Compose V2  
 📌 Sistema operativo: Debian 13  
-📌 Monitoreo: Portainer, Grafana + Prometheus  
+📌 Monitoreo: Portainer, Prometheus, Grafana, cAdvisor, Node Exporter  
 📌 Red: Bridge personalizada (my_server)  
-📌 Workflow: n8n (host local)  
-📌 Repositorio: Docker-Labs     
+📌 Workflow: n8n (ejecutado en el host)  
+📌 Repositorio: Docker-Labs       
 
 ---
 
@@ -88,35 +88,43 @@ El objetivo principal es construir un entorno completo de transcripción, workfl
 
 ---
 
-## 🔹 Objetivos del Laboratorio
-* Crear imágenes personalizadas para servicios web, microservicios y bases de datos.
-* Desplegar múltiples contenedores con Docker Compose.
-* Configurar redes internas y volúmenes persistentes.
-* Automatizar workflows de ingestión de contenido multimedia con n8n.
-* Implementar un asistente RAG que responde consultas usando embeddings locales.
-* Documentar y monitorear la ejecución del entorno completo.  
+## 🔹 Objetivos del Laboratorio  
+* Crear imágenes personalizadas para servicios web, microservicios y bases de datos.  
+* Desplegar múltiples contenedores con Docker Compose.  
+* Configurar redes internas y volúmenes persistentes.  
+* Automatizar workflows de ingestión de contenido multimedia con n8n.  
+* Implementar un asistente RAG que responde consultas usando embeddings locales.  
+* Documentar y monitorear el entorno con Prometheus, Grafana y Portainer.    
 
 ---
 
 ## 🔹 Configuraciones Clave
+  
+###🔸 Orquestación con Docker Compose
+El laboratorio está organizado en múltiples stacks, separados por dominio funcional:  
+  
+* Core (my_server): backend, frontend, PostgreSQL + pgvector, Ollama y microservicios.  
+* Monitoreo (monitoreo): Prometheus, Grafana, cAdvisor y Node Exporter.  
+* Administración: Portainer CE.  
+* Esta separación permite modularidad, escalabilidad y mantenimiento independiente.
+    
+###🔸 Redes Docker  
+* Red bridge personalizada: my_server  
+* DNS interno por nombre de servicio  
+* Comunicación privada entre contenedores  
+* Exposición mínima de puertos  
+Ejemplos:  
+* backend_api → postgres:5432  
+* backend_api → ollama:11434  
+* backend_api → audio_extractor:5000  
 
-### 🔸 Estructura del Proyecto
-                           
-Docker-Labs/  
-├── compose.yaml  
-├── app/  
-│   ├── Dockerfile  
-│   ├── requirements.txt  
-│   └── app.py├── prometheus/  
-│   ├── prometheus.yml  
-│   └── data/  
-├── grafana/  
-│   └── provisioning/  
-│       ├── dashboards/  
-│       └── datasources/  
-├── portainer/  
-│   └── config/  
-└── README.md  
+###🔸 Volúmenes Persistentes
+Volumen          	   Uso
+db_data	          Datos PostgreSQL + pgvector  
+ollama_data	      Modelos y embeddings  
+portainer_data	  Configuración Portainer  
+grafana_data	  Dashboards Grafana  
+prometheus_data   Métricas históricas  
 
 ---
 
@@ -254,10 +262,10 @@ POST	 /api/rag/query	   Consultar asistente RAG
 
 ✅ Contenedores desplegados correctamente con docker compose up -d.  
 ✅ Acceso web a Portainer: http://localhost:9000.  
-✅ Frontend accesible en http://localhost.  
+✅ Frontend accesible en http://localhost:8080.  
 ✅ Endpoints de transcripción, embeddings y RAG funcionando.  
 ✅ Prometheus recolectando métricas de contenedores activos.  
-✅ Grafana mostrando dashboards de monitoreo funcional.  
+✅ Grafana mostrando dashboards de monitoreo en http://localhost:3000.  
 ✅ Volúmenes persistentes mantienen datos tras reinicios.  
 
 ---
