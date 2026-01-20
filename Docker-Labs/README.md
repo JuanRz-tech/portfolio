@@ -98,9 +98,9 @@ El objetivo principal es construir un entorno completo de transcripción, workfl
 
 ---
 
-## 🔹 Configuraciones Clave
+## 🔹 Configuraciones Clave  
   
-### 🔸 Orquestación con Docker Compose
+### 🔸 Orquestación con Docker Compose  
 El laboratorio está organizado en múltiples stacks, separados por dominio funcional:  
   
 * Core (my_server): backend, frontend, PostgreSQL + pgvector, Ollama y microservicios.  
@@ -118,7 +118,7 @@ Ejemplos:
 * backend_api → ollama:11434  
 * backend_api → audio_extractor:5000  
 
-### 🔸 Volúmenes Persistentes
+### 🔸 Volúmenes Persistentes  
 Volumen---------Uso  
 db_data---------Datos PostgreSQL + pgvector  
 ollama_data-----Modelos y embeddings  
@@ -126,6 +126,53 @@ portainer_data--Configuración Portainer
 grafana_data----Dashboards Grafana  
 prometheus_data-Métricas históricas  
 
+### 🔸 Microservicios  
+Servicio-------------Función  
+audio_extractor-----Extracción de audio  
+ffmpeg--------------Conversión multimedia  
+python-utils--------Limpieza y parsing de texto  
+  
+Cada microservicio es desacoplado y reutilizable.  
+
+### 🔸 Base de Datos Vectorial  
+* PostgreSQL 15 + pgvector  
+* Almacenamiento de texto, metadatos y embeddings  
+* Búsqueda semántica para RAG  
+
+
+### 🔸 Motor LLM & Embeddings  
+* Servicio: Ollama  
+* Modelos locales (sin dependencia cloud)  
+* Persistencia mediante volumen dedicado
+
+### 🔸 Frontend  
+* SPA (Vite / Vue)  
+* Visualización de transcripciones  
+* Interfaz de consulta RAG  
+* Comunicación exclusiva con backend_api
+
+### 🔸 Automatización con n8n  
+* Ejecutado en el host  
+* Ingesta automática de audio/video  
+* Orquestación completa del pipeline  
+* Uso de Webhooks y REST API
+
+###🔸 Observabilidad  
+* Prometheus: métricas de host y contenedores
+* Grafana: dashboards personalizados
+* cAdvisor: métricas por contenedor
+* Node Exporter: métricas del sistema
+
+Puertos:  
+* Grafana: 3000  
+* Prometheus: 9090  
+* cAdvisor: 8081  
+* Node Exporter: 9100
+
+### 🔸 Administración  
+* Portainer CE  
+* Gestión visual de stacks, contenedores, redes y logs
+* Acceso: http://localhost:9000/  
 ---
 
 ### 🔸 Docker Compose
@@ -241,12 +288,15 @@ networks:
 ---
 
 ## 🔹 Endpoints del Backend
-Método -   Endpoint -	    Descripción  
-GET	 /api/videos	   Listado de videos cargados  
-GET	 /api/videos/{id}	   Detalle de un video  
-POST	 /api/transcribe	   Transcribir audio/video  
-POST	 /api/embedding	   Generar embeddings de texto/audio  
-POST	 /api/rag/query	   Consultar asistente RAG     
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET    | /api/videos | Listado de videos cargados |
+| GET    | /api/videos/{id} | Detalle de un video |
+| POST   | /api/transcribe | Transcribir audio/video |
+| POST   | /api/embedding | Generar embeddings de texto/audio |
+| POST   | /api/rag/query | Consultar asistente RAG |
+     
 
 ---
 
