@@ -118,19 +118,25 @@ Ejemplos:
 * backend_api → ollama:11434  
 * backend_api → audio_extractor:5000  
 
-### 🔸 Volúmenes Persistentes  
-Volumen---------Uso  
-db_data---------Datos PostgreSQL + pgvector  
-ollama_data-----Modelos y embeddings  
-portainer_data--Configuración Portainer  
-grafana_data----Dashboards Grafana  
-prometheus_data-Métricas históricas  
+### 🔸 Volúmenes Persistentes
 
-### 🔸 Microservicios  
-Servicio-------------Función  
-audio_extractor-----Extracción de audio  
-ffmpeg--------------Conversión multimedia  
-python-utils--------Limpieza y parsing de texto  
+| Volumen | Uso |
+|--------|-----|
+| db_data | Datos PostgreSQL + pgvector |
+| ollama_data | Modelos y embeddings |
+| portainer_data | Configuración Portainer |
+| grafana_data | Dashboards Grafana |
+| prometheus_data | Métricas históricas |
+  
+
+### 🔸 Microservicios
+
+| Servicio | Función |
+|---------|---------|
+| audio_extractor | Extracción de audio |
+| ffmpeg | Conversión multimedia |
+| python-utils | Limpieza y parsing de texto |
+  
   
 Cada microservicio es desacoplado y reutilizable.  
 
