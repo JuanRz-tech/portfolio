@@ -298,7 +298,7 @@ networks:
 
 <div align="center">
 
-| ![n8n - Workflow](n8n-workflow.png) | ![Grafana - Dashboard 1](grafana1.png) |
+| ![n8n - Workflow](workflown8n.png) | ![Grafana - Dashboard 1](grafana1.png) |
 |:--:|:--:|
 | 🔄 *n8n - Workflow* | 📊 *Grafana - Dashboard 1* |
 
