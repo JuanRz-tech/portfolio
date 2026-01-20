@@ -26,26 +26,65 @@ El objetivo principal es construir un entorno completo de transcripción, workfl
 
 ## 🔹 Topología General
 
-**Diagrama lógico del entorno de contenedores:**
+**Diagrama lógico del entorno de contenedores**
 
-[ Host Linux / Debian ]  
-│  
-├── Red Docker (bridge: `my_server`)  
-│     ├── postgres → PostgreSQL + pgvector  
-│     ├── ollama → Modelos locales y embeddings  
-│     ├── audio_extractor → Microservicio extracción audio  
-│     ├── ffmpeg → Procesamiento multimedia  
-│     ├── python-utils → Utilidades Python  
-│     ├── backend_api → API principal  
-│     ├── frontend_app → Interfaz web  
-│     └── portainer → Administración visual contenedores  
-│  
-├── n8n → (Ejecutado en host, fuera de Docker)  
-│  
-└── Volúmenes persistentes  
-      ├── db_data → PostgreSQL  
-      ├── ollama_data → Modelos Ollama  
-      └── portainer_data → Configuración Portainer 
+[ Host Linux / Debian 13 ]
+│
+├── Docker Network (bridge: `my_server`)
+│   │
+│   ├── postgres
+│   │     └── PostgreSQL + pgvector (embeddings RAG)
+│   │
+│   ├── ollama
+│   │     └── Modelos LLM locales + embeddings
+│   │
+│   ├── audio_extractor
+│   │     └── Extracción de audio desde video
+│   │
+│   ├── ffmpeg
+│   │     └── Procesamiento multimedia
+│   │
+│   ├── python-utils
+│   │     └── Scripts de transcripción y parsing
+│   │
+│   ├── backend_api
+│   │     └── API principal (Transcripción + RAG)
+│   │
+│   ├── frontend_app
+│   │     └── Interfaz web de consultas y resultados
+│   │
+│   ├── portainer
+│   │     └── Administración visual de contenedores
+│   │
+│   ├── prometheus
+│   │     └── Recolección de métricas
+│   │
+│   ├── grafana
+│   │     └── Dashboards y visualización
+│   │
+│   ├── cadvisor
+│   │     └── Métricas de contenedores
+│   │
+│   └── node_exporter
+│         └── Métricas del host
+│
+├── n8n (Host)
+│   └── Orquestación de workflows
+│        • Ingesta de video/audio
+│        • Llamadas a backend_api
+│        • Automatización end-to-end
+│
+└── Volúmenes persistentes
+    │
+    ├── db_data
+    │     └── Datos PostgreSQL
+    │
+    ├── ollama_data
+    │     └── Modelos y embeddings
+    │
+    └── portainer_data
+          └── Configuración Portainer
+
 
 ---
 
