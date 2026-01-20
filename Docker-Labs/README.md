@@ -163,7 +163,7 @@ Cada microservicio es desacoplado y reutilizable.
 * Orquestación completa del pipeline  
 * Uso de Webhooks y REST API
 
-###🔸 Observabilidad  
+### 🔸 Observabilidad  
 * Prometheus: métricas de host y contenedores
 * Grafana: dashboards personalizados
 * cAdvisor: métricas por contenedor
