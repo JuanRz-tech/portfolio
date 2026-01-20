@@ -299,7 +299,7 @@ networks:
 ### 🧰 Portainer
 Captura de la interfaz de administración de contenedores.  
 
-![Portainer - Dashboard](ruta/a/tu/imagen-portainer-dashboard.png)
+![Portainer - Dashboard](/Docker.png)
 
 ---
 
