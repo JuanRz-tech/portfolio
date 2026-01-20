@@ -296,34 +296,21 @@ networks:
 
 ## 🔹 Capturas
 
-### 🧰 Portainer
-Captura de la interfaz de administración de contenedores.  
+<div align="center">
 
-![Portainer - Dashboard](/Docker.png)
+| ![n8n - Workflow](n8n-workflow.png) | ![Grafana - Dashboard 1](grafana1.png) |
+|:--:|:--:|
+| 🔄 *n8n - Workflow* | 📊 *Grafana - Dashboard 1* |
 
----
+| ![Grafana - Dashboard 2](grafana2.png) | ![Web App - Home](web.png) |
+|:--:|:--:|
+| 📈 *Grafana - Dashboard 2* | 🌐 *Web App - Home* |
 
-### 🔄 n8n - Workflows  
+| ![Portainer](portainer.png) |  |
+|:--:|:--:|
+| 🧰 *Portainer* |  |
 
-![n8n - Workflow](ruta/a/tu/imagen-n8n-workflow.png)
-
----
-
-### 📊 Grafana - Dashboards
-Capturas de los dashboards de métricas.
-
-![Grafana - Dashboard 1](ruta/a/tu/imagen-grafana-dashboard1.png)
-
-![Grafana - Dashboard 2](ruta/a/tu/imagen-grafana-dashboard2.png)
-
----
-
-### 🌐 Web App
-Capturas de la aplicación web en funcionamiento.
-
-![Web App - Home](ruta/a/tu/imagen-web-home.png)
-
-
+</div>
 
 
 ---
