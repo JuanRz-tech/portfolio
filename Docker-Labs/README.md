@@ -100,7 +100,7 @@ El objetivo principal es construir un entorno completo de transcripción, workfl
 
 ## 🔹 Configuraciones Clave
   
-###🔸 Orquestación con Docker Compose
+### 🔸 Orquestación con Docker Compose
 El laboratorio está organizado en múltiples stacks, separados por dominio funcional:  
   
 * Core (my_server): backend, frontend, PostgreSQL + pgvector, Ollama y microservicios.  
@@ -108,7 +108,7 @@ El laboratorio está organizado en múltiples stacks, separados por dominio func
 * Administración: Portainer CE.  
 * Esta separación permite modularidad, escalabilidad y mantenimiento independiente.
     
-###🔸 Redes Docker  
+### 🔸 Redes Docker  
 * Red bridge personalizada: my_server  
 * DNS interno por nombre de servicio  
 * Comunicación privada entre contenedores  
@@ -118,13 +118,13 @@ Ejemplos:
 * backend_api → ollama:11434  
 * backend_api → audio_extractor:5000  
 
-###🔸 Volúmenes Persistentes
-Volumen          	   Uso
-db_data	          Datos PostgreSQL + pgvector  
-ollama_data	      Modelos y embeddings  
-portainer_data	  Configuración Portainer  
-grafana_data	  Dashboards Grafana  
-prometheus_data   Métricas históricas  
+### 🔸 Volúmenes Persistentes
+Volumen---------Uso
+db_data---------Datos PostgreSQL + pgvector  
+ollama_data-----Modelos y embeddings  
+portainer_data--Configuración Portainer  
+grafana_data----Dashboards Grafana  
+prometheus_data-Métricas históricas  
 
 ---
 
@@ -240,7 +240,7 @@ networks:
 ```
 ---
 
-🔹 Endpoints del Backend
+## 🔹 Endpoints del Backend
 Método -   Endpoint -	    Descripción  
 GET	 /api/videos	   Listado de videos cargados  
 GET	 /api/videos/{id}	   Detalle de un video  
@@ -276,7 +276,7 @@ POST	 /api/rag/query	   Consultar asistente RAG
 
 ---
 
-##🔹 Archivos
+## 🔹 Archivos
 * compose.yaml → Archivo principal de orquestación.  
 * Dockerfile  → Imagen personalizada para la aplicación web.  
 * prometheus.yml → Configuración de monitoreo.  
