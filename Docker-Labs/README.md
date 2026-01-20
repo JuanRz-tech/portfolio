@@ -181,7 +181,20 @@ Puertos:
 * Acceso: http://localhost:9000/  
 ---
 
-### 🔸 Docker Compose
+### 🔸 Docker Compose  
+NOTA:  
+El siguiente docker-compose es una versión simplificada y representativa  
+de la arquitectura general del laboratorio.  
+
+No incluye:  
+- configuraciones avanzadas de seguridad  
+- optimizaciones de performance  
+- definición completa de microservicios  
+- pipelines internos de procesamiento  
+
+El objetivo es mostrar la topología y relación entre servicios,  
+no exponer la implementación completa.  
+  
 Archivo: `compose.yaml`  
 Define los servicios, redes y volúmenes persistentes.
 
