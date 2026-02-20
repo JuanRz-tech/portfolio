@@ -18,7 +18,7 @@ Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud
 
 ---
 
-### 2. 🛡️ Seguridad Perimetral (Fortinet & pfSense)
+### 2. 🛡️ Seguridad Perimetral (Fortinet)
 - Implementación de un **firewall perimetral** con reglas de acceso.  
 - Configuración de políticas de seguridad y segmentación de red.  
 - Pruebas de filtrado de tráfico y control de acceso a servicios internos.  
