@@ -1,19 +1,26 @@
-# 🧩 Laboratorio de Infraestructura Empresarial - VMware / Proxmox + AWS
+# 🧩 Laboratorio de Infraestructura Híbrida – GNS3 + AWS
 
 ## 🔹 Descripción
-Este laboratorio integra conceptos avanzados de **infraestructura de red, virtualización y cloud computing**, simulando el entorno de una empresa moderna con operaciones híbridas (local + nube).  
-El objetivo es diseñar, implementar y documentar una **topología empresarial completa**, con **VLANs, routing dinámico, ACLs, servicios internos y conectividad hacia AWS**.
+Laboratorio de infraestructura híbrida orientado a la integración funcional de servicios empresariales básicos, seguridad perimetral y despliegue complementario en la nube.   
+
+El objetivo principal es unificar distintos mini-proyectos en un entorno cohesivo donde:
+
+* Un Firewall FortiGate controla y segmenta la red.
+* Un Servidor Linux Debian 13 provee múltiples servicios internos.
+* Clientes Windows y Linux consumen dichos servicios.
+* Se integra una implementación básica en AWS como extensión cloud del laboratorio.
+* El enfoque está en la integración de infraestructura, no en configuraciones avanzadas de switching o routing.
 
 ---
 
 ## 🔹 Entorno
 
-📌 **Plataforma local:** Proxmox VE / VMware Workstation  
-📌 **Entorno cloud:** AWS Free Tier  
-📌 **Sistemas operativos:** Ubuntu Server 22.04, Debian 12, Windows Server 2022  
-📌 **Rango de red principal:** 192.168.10.0/24  
-📌 **Conectividad cloud:** VPN site-to-site con VPC AWS  
-📌 **Roles principales:** Servidor DNS/DHCP, Router local, Servidor web y Firewall perimetral (pfSense)
+📌 **Plataforma local:** GNS3  
+📌 **Firewall: FortiGate (configuración básica funcional)  
+📌 **Servidor: Debian 13    
+📌 **Clientes: Linux Mint / Windows    
+📌 **Entorno Cloud: AWS Free Tier    
+📌 **Roles principales:** Servidor DNS/DHCP, Servidor web y Firewall perimetral (Fortigate)
 
 ---
 
@@ -21,65 +28,72 @@ El objetivo es diseñar, implementar y documentar una **topología empresarial c
 
 📌 **Segmentos definidos:**
 
-| VLAN | Descripción | Subred | Servicios |
-|------|--------------|--------|------------|
-| 10 | Administración | 192.168.10.0/24 | DNS, DHCP, NTP |
-| 20 | Servidores | 192.168.20.0/24 | Web, Base de Datos |
-| 30 | Finanzas | 192.168.30.0/24 | Acceso restringido |
-| 40 | Soporte | 192.168.40.0/24 | Escritorio remoto |
-| 50 | Backup | 192.168.50.0/24 | Rsync, NFS |
-| Cloud | AWS VPC | 10.0.10.0/24 | EC2 + S3 backups |
+| Segmento        | Descripción                          | Subred              | Servicios |
+|-----------------|--------------------------------------|---------------------|-----------|
+| LAN-Sistema     | Red de administración                | 192.168.10.0/24     | SSH, Gestión |
+| LAN-Departamentos| Clientes Windows / Linux             | 192.168.20.0/24     | Navegación, DNS |
+| DMZ             | Red de servidores                    | 192.168.15.0/24     | DNS, DHCP, NTP, Web |
+| WAN             | Salida a Internet / Cloud            | IP pública / DHCP ISP | NAT, Reglas de navegación |
+| Cloud (AWS)     | Entorno complementario en la nube    | Red VPC AWS         | EC2 (servicio web / pruebas) |
 
 ---
 
 ## 🔹 Tecnologías Implementadas
-- VLANs (segmentación por departamentos).  
-- Enrutamiento dinámico con **OSPF** y rutas estáticas de respaldo.  
-- **VPN site-to-site** entre Proxmox y AWS VPC.  
-- Firewall **pfSense** con ACLs extendidas.  
-- DNS y DHCP distribuidos entre servidores internos.  
-- Servidor web interno con Nginx y acceso controlado.  
-- Balanceo básico de carga en servidores de aplicación.  
-- Backup automatizado hacia S3 en AWS.  
+
+- Plataforma de simulación de red en GNS3.  
+- Firewall FortiGate con segmentación por interfaces.  
+- Reglas de firewall para control de navegación y acceso entre redes.  
+- NAT para salida a Internet.  
+- DHCP habilitado en interfaz específica del firewall.  
+- Implementación de red DMZ para aislamiento de servidor.  
+- Servidor Debian 13 con servicios integrados:
+  * DNS (Bind9)
+  * DHCP
+  * NTP
+  * Servidor Web (Nginx)
+  * Administración remota por SSH
+- Integración con AWS (EC2 en Free Tier) como extensión cloud del laboratorio.  
 
 ---
 
 ## 🔹 Configuraciones Clave
 
-1. **Red y VLANs**
-   - VLANs creadas en switches virtuales y asignadas a VMs.
-   - Interconexión entre VLANs autorizadas mediante OSPF.
+1. **Segmentación de Red**
+   - Separación lógica mediante interfaces independientes en FortiGate.
+   - Creación de red DMZ para alojar el servidor.
+   - Aislamiento entre segmentos mediante políticas firewall.
 
-2. **pfSense Firewall**
-   - Interfaces: LAN, DMZ, VPN, WAN.
-   - Reglas ACL para permitir solo tráfico necesario.
-   - Bloqueo de acceso interdepartamental no autorizado.
+2. **Firewall FortiGate**
+   - Configuración manual de IP en cada interfaz.
+   - Activación de DHCP solo en interfaz definida.
+   - Reglas de navegación LAN → WAN.
+   - Políticas específicas para acceso hacia DMZ.
+   - Configuración de NAT para salida a Internet.
 
-3. **Servidor DHCP/DNS**
-   - Configuración en servidor Linux (Bind9 + isc-dhcp-server).
-   - DNS interno con resolución de dominios `empresa.local`.
+3. **Servidor Debian 13**
+   - Configuración de Bind9 como DNS interno.
+   - Servicio DHCP para red específica.
+   - NTP para sincronización horaria.
+   - Servidor web Nginx accesible según reglas del firewall.
+   - Acceso administrativo mediante SSH desde red autorizada.
 
-4. **VPN con AWS**
-   - Conexión IPsec con VPC 10.0.10.0/24.
-   - Permite tráfico hacia instancias EC2 y almacenamiento S3.
-
-5. **Alta Disponibilidad**
-   - Dos routers virtuales con failover configurado (VRRP).  
-   - Monitorización de interfaces con scripts de salud (`ping check`).  
-
-6. **Servicios Cloud**
-   - EC2 con web demo (`nginx + flask`).  
-   - S3 configurado para backups automáticos diarios.  
+4. **Integración con AWS**
+   - Creación de instancia EC2 en AWS Free Tier.
+   - Pruebas de conectividad desde red local.
+   - Uso de entorno cloud como extensión funcional del laboratorio.
 
 ---
 
 ## 🔹 Resultados de Pruebas
-- ✅ Conectividad estable entre VLANs autorizadas.  
-- ✅ Resolución DNS y asignación DHCP correctas.  
-- ✅ Comunicación segura entre Proxmox y AWS mediante VPN.  
-- ✅ Firewall filtra correctamente tráfico interno y externo.  
-- ✅ Backups automáticos a S3 verificados.  
-- ✅ Alta disponibilidad en gateway local mediante VRRP.  
+
+- ✅ Segmentación funcional entre LAN-Sistema, LAN-Usuarios y DMZ.  
+- ✅ Aislamiento correcto del servidor en red DMZ.  
+- ✅ Asignación DHCP operativa en la interfaz configurada del FortiGate.  
+- ✅ Resolución DNS interna funcionando correctamente desde clientes.  
+- ✅ Acceso web al servidor Debian validado según políticas de firewall.  
+- ✅ Navegación a Internet operativa mediante NAT en FortiGate.  
+- ✅ Conectividad exitosa con instancia EC2 en AWS desde la red local.  
+- ✅ Administración remota por SSH funcional desde red autorizada.  
 
 ---
 
