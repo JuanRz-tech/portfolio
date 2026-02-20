@@ -34,13 +34,6 @@ Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud
 
 ---
 
-### 4. 🐍 Automatización de Redes con Python
-- Script para hacer **backup automático de configuraciones Cisco vía SSH**.  
-- Reducción de tiempo en tareas repetitivas de administración.  
-- **Repositorio / Script:** [Python-Networking](Python-Networking/README.md)
-
----
-
 ### 5. 🧩 Laboratorio de Infraestructura Empresarial
 - Implementación de topología híbrida con VLANs, routing dinámico y ACLs.  
 - Integración entre entornos virtualizados (VMware / Proxmox) y nube (AWS).  
@@ -49,19 +42,11 @@ Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud
 
 ---
 
-### 6. ☁️ Despliegue Cloud (AWS / Azure)
+### 6. ☁️ Despliegue Cloud (AWS)
 - Creación de instancias EC2 y Azure VM con redes virtuales seguras (VPC/VNet).  
 - Configuración de VPN site-to-site entre laboratorio local y nube.  
 - Gestión de reglas de seguridad, subredes privadas y backups automatizados.  
 - **Repositorio / Documentación:** [Cloud-Labs](Cloud-Labs/README.md)
-
----
-
-### 7. ⚙️ Automatización de Infraestructura con Ansible
-- Playbooks para configurar servidores Linux automáticamente.  
-- Inventario dinámico para despliegue de entornos híbridos.  
-- Integración con Terraform para aprovisionamiento en la nube.  
-- **Repositorio / Documentación:** [Infra-Automation](Infra-Automation/README.md)
 
 ---
 
@@ -75,8 +60,7 @@ Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud
 
 ## 🎓 Formación y Certificaciones
 - **CCNA (en progreso)**  
-- **AWS Cloud Practitioner** (en preparación)  
-- **Ansible & Terraform Fundamentals**  
+- **AWS Cloud Practitioner** (en preparación)    
 - Cursos de **Linux, virtualización y ciberseguridad** en Platzi, Udemy y TryHackMe  
 - Laboratorios prácticos de redes, cloud y automatización  
 
@@ -85,7 +69,7 @@ Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud
 ## 🚀 Habilidades Técnicas
 
 **Infraestructura:** Linux, Proxmox, VMware, pfSense, Fortinet  
-**Cloud:** AWS, Azure, Terraform, Ansible  
+**Cloud:** AWS, Terraform, Ansible  
 **Contenedores:** Docker, Docker Compose  
 **Redes:** VLANs, Routing, ACLs, VPN, DHCP, DNS  
 **Automatización:** Python, Bash, PowerShell, YAML  
