@@ -16,7 +16,7 @@ El objetivo principal es unificar distintos mini-proyectos en un entorno cohesiv
 ## 🔹 Entorno
 
 📌 **Plataforma local:** GNS3  
-📌 **Firewall: FortiGate (configuración básica funcional)  
+📌 **Firewall: FortiGate (configuración básica)  
 📌 **Servidor: Debian 13    
 📌 **Clientes: Linux Mint / Windows    
 📌 **Entorno Cloud: AWS Free Tier    
@@ -30,8 +30,8 @@ El objetivo principal es unificar distintos mini-proyectos en un entorno cohesiv
 
 | Segmento        | Descripción                          | Subred              | Servicios |
 |-----------------|--------------------------------------|---------------------|-----------|
-| LAN-Sistema     | Red de administración                | 192.168.10.0/24     | SSH, Gestión |
-| LAN-Departamentos| Clientes Windows / Linux             | 192.168.20.0/24     | Navegación, DNS |
+| LAN-Sistemas    | Red de administración                | 192.168.10.0/24     | SSH, Gestión |
+| LAN-Departamentos| Clientes Windows / Linux            | 192.168.20.0/24     | Navegación, DNS |
 | DMZ             | Red de servidores                    | 192.168.15.0/24     | DNS, DHCP, NTP, Web |
 | WAN             | Salida a Internet / Cloud            | IP pública / DHCP ISP | NAT, Reglas de navegación |
 | Cloud (AWS)     | Entorno complementario en la nube    | Red VPC AWS         | EC2 (servicio web / pruebas) |
@@ -44,7 +44,7 @@ El objetivo principal es unificar distintos mini-proyectos en un entorno cohesiv
 - Firewall FortiGate con segmentación por interfaces.  
 - Reglas de firewall para control de navegación y acceso entre redes.  
 - NAT para salida a Internet.  
-- DHCP habilitado en interfaz específica del firewall.  
+- DHCP habilitado en interfaz específica(Sistemas) del firewall.  
 - Implementación de red DMZ para aislamiento de servidor.  
 - Servidor Debian 13 con servicios integrados:
   * DNS (Bind9)
@@ -65,14 +65,14 @@ El objetivo principal es unificar distintos mini-proyectos en un entorno cohesiv
 
 2. **Firewall FortiGate**
    - Configuración manual de IP en cada interfaz.
-   - Activación de DHCP solo en interfaz definida.
+   - Activación de DHCP solo en interfaz definida(Sistemas).
    - Reglas de navegación LAN → WAN.
    - Políticas específicas para acceso hacia DMZ.
    - Configuración de NAT para salida a Internet.
 
 3. **Servidor Debian 13**
    - Configuración de Bind9 como DNS interno.
-   - Servicio DHCP para red específica.
+   - Servicio DHCP para red específica(Departamentos).
    - NTP para sincronización horaria.
    - Servidor web Nginx accesible según reglas del firewall.
    - Acceso administrativo mediante SSH desde red autorizada.
@@ -86,9 +86,9 @@ El objetivo principal es unificar distintos mini-proyectos en un entorno cohesiv
 
 ## 🔹 Resultados de Pruebas
 
-- ✅ Segmentación funcional entre LAN-Sistema, LAN-Usuarios y DMZ.  
+- ✅ Segmentación funcional entre LAN-Sistemas, LAN-Departamentos y DMZ.  
 - ✅ Aislamiento correcto del servidor en red DMZ.  
-- ✅ Asignación DHCP operativa en la interfaz configurada del FortiGate.  
+- ✅ Asignación DHCP operativa en la interfaz configurada(Sistemas) del FortiGate.  
 - ✅ Resolución DNS interna funcionando correctamente desde clientes.  
 - ✅ Acceso web al servidor Debian validado según políticas de firewall.  
 - ✅ Navegación a Internet operativa mediante NAT en FortiGate.  
@@ -98,25 +98,31 @@ El objetivo principal es unificar distintos mini-proyectos en un entorno cohesiv
 ---
 
 ## 🔹 Capturas
-![Topología general](screenshots/topologia_infra.png)
-![pfSense dashboard](screenshots/pfsense_dashboard.png)
-![VPN AWS establecida](screenshots/vpn_status.png)
+
+![Topología en GNS3](screenshots/topologia_gns3.png)
+![FortiGate - Interfaces y Políticas](screenshots/fortigate_dashboard.png)
+![Servidor Debian - Servicios activos](screenshots/debian_services.png)
+![Instancia EC2 en AWS](screenshots/aws_ec2.png)
 
 ---
 
 ## 🔹 Archivos
-- [topologia_infraestructural.vsdx](topologia_infraestructural.vsdx) → Diagrama de red.  
-- [configuraciones.txt](configuraciones.txt) → Detalle de comandos y configuraciones.  
-- [vpn_config.conf](vpn_config.conf) → Configuración de túnel IPsec.  
-- [backup_s3.sh](backup_s3.sh) → Script de respaldo automatizado.  
+
+- [topologia_gns3.gns3](topologia_gns3.gns3) → Proyecto base de la topología en GNS3.  
+- [config_fortigate.txt](config_fortigate.txt) → Resumen de configuración de interfaces y políticas.  
+- [config_debian_servicios.txt](config_debian_servicios.txt) → Configuración DNS, DHCP, NTP y Web.  
+- [pruebas_conectividad.txt](pruebas_conectividad.txt) → Resultados de pruebas (ping, nslookup, curl, ssh).  
 
 ---
 
 ## 🔹 Futuras Mejoras
-- Migrar servicios internos a **contenedores Docker**.  
-- Añadir **monitorización con Grafana + Prometheus**.  
-- Implementar **Ansible/Terraform** para automatización de despliegues.  
-- Extender topología a múltiples regiones de AWS.  
+
+- Implementar VPN site-to-site entre red local y AWS.  
+- Separar servicios en múltiples servidores (DNS/DHCP independiente del Web).  
+- Migrar servicios a contenedores Docker.  
+- Implementar monitoreo con Prometheus + Grafana.  
+- Automatizar despliegues con Ansible.  
+- Implementar control de logs centralizado.  
 
 ---
 
