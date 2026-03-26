@@ -78,6 +78,5 @@ Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud
 ---
 
 ## 📫 Contacto
-- LinkedIn: [Tu perfil aquí]  
-- GitHub: [Tu perfil aquí]  
-- Email: [Tu email profesional]  
+- LinkedIn: https://www.linkedin.com/in/juan-rodr%C3%ADguez-co    
+- Email: jjuarc2@gmail.com  
