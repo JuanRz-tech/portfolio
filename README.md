@@ -1,10 +1,14 @@
 # 💻 Portfolio
-Mi portfolio profesional en **Redes, Infraestructura & Cloud Engineering**
+
+Mi espacio profesional de **Redes, Sistemas e Infraestructura IT**
 
 # 👋 Hola, soy Juan R.
 
-Administrador de redes con experiencia en **Cisco, Routing, Switching y cableado estructurado**.  
-Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud Engineer**, fortaleciendo conocimientos en **virtualización, contenedores, automatización e integración híbrida (on-prem + cloud)**.
+Administrador de redes con experiencia en **Cisco, Routing & Switching y cableado estructurado**.
+
+Me interesa diseñar, construir y automatizar soluciones de infraestructura, explorando tecnologías como **Linux, virtualización, contenedores y DevOps**.
+
+Aquí comparto proyectos prácticos, experimentos y conocimientos adquiridos mientras sigo evolucionando como profesional IT. 🚀
 
 ---
 
@@ -34,7 +38,7 @@ Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud
 
 ---
 
-### 5. 🧩 Laboratorio de Infraestructura Empresarial
+### 4. 🧩 Laboratorio de Infraestructura Empresarial
 - Implementación de topología híbrida con VLANs, routing dinámico y ACLs.  
 - Integración entre entornos virtualizados (VMware / Proxmox) y nube (AWS).  
 - Segmentación de red, alta disponibilidad y documentación completa.  
@@ -42,7 +46,7 @@ Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud
 
 ---
 
-### 6. ☁️ Despliegue Cloud (AWS)
+### 5. ☁️ Despliegue Cloud (AWS)
 - Creación de instancias EC2 y Azure VM con redes virtuales seguras (VPC/VNet).  
 - Configuración de VPN site-to-site entre laboratorio local y nube.  
 - Gestión de reglas de seguridad, subredes privadas y backups automatizados.  
@@ -50,7 +54,7 @@ Actualmente estoy orientando mi carrera hacia el rol de **Infrastructure & Cloud
 
 ---
 
-### 8. 🐳 Docker & Contenedores
+### 6. 🐳 Docker & Contenedores
 - Creación de imágenes personalizadas y despliegue de servicios con **Docker Compose**.  
 - Configuración de redes internas entre contenedores y persistencia con volúmenes.  
 - Monitoreo básico con **Portainer** y métricas con **Grafana + Prometheus**.  
