@@ -22,15 +22,7 @@ Aquí comparto proyectos prácticos, experimentos y conocimientos adquiridos mie
 
 ---
 
-### 2. 🛡️ Seguridad Perimetral (Fortinet)
-- Implementación de un **firewall perimetral** con reglas de acceso.  
-- Configuración de políticas de seguridad y segmentación de red.  
-- Pruebas de filtrado de tráfico y control de acceso a servicios internos.  
-- **Repositorio / Documentación:** [Network Security](Network-Security/README.md)
-
----
-
-### 3. 🐧 Administración de Sistemas Linux
+### 2. 🐧 Administración de Sistemas Linux
 - Instalación y configuración básica de servidores en Linux (Ubuntu/Debian).  
 - Configuración de **servicios de red**: SSH, Apache/Nginx, DHCP, DNS.  
 - Prácticas de **hardening**: gestión de usuarios, permisos y firewall (UFW/iptables).  
@@ -38,7 +30,7 @@ Aquí comparto proyectos prácticos, experimentos y conocimientos adquiridos mie
 
 ---
 
-### 4. 🧩 Laboratorio de Infraestructura Empresarial
+### 3. 🧩 Laboratorio de Infraestructura Empresarial
 - Implementación de topología híbrida con VLANs, routing dinámico y ACLs.  
 - Integración entre entornos virtualizados (VMware / Proxmox) y nube (AWS).  
 - Segmentación de red, alta disponibilidad y documentación completa.  
@@ -46,15 +38,7 @@ Aquí comparto proyectos prácticos, experimentos y conocimientos adquiridos mie
 
 ---
 
-### 5. ☁️ Despliegue Cloud (AWS)
-- Creación de instancias EC2 y Azure VM con redes virtuales seguras (VPC/VNet).  
-- Configuración de VPN site-to-site entre laboratorio local y nube.  
-- Gestión de reglas de seguridad, subredes privadas y backups automatizados.  
-- **Repositorio / Documentación:** [Cloud-Labs](Cloud-Labs/README.md)
-
----
-
-### 6. 🐳 Docker & Contenedores
+### 4. 🐳 Docker & Contenedores
 - Creación de imágenes personalizadas y despliegue de servicios con **Docker Compose**.  
 - Configuración de redes internas entre contenedores y persistencia con volúmenes.  
 - Monitoreo básico con **Portainer** y métricas con **Grafana + Prometheus**.  
@@ -63,17 +47,15 @@ Aquí comparto proyectos prácticos, experimentos y conocimientos adquiridos mie
 ---
 
 ## 🎓 Formación y Certificaciones
-- **CCNA (en progreso)**  
-- **AWS Cloud Practitioner** (en preparación)    
+- **CCNA (en progreso)**      
 - Cursos de **Linux, virtualización y ciberseguridad** en Platzi, Udemy y TryHackMe  
-- Laboratorios prácticos de redes, cloud y automatización  
+- Laboratorios prácticos de redes y automatización  
 
 ---
 
 ## 🚀 Habilidades Técnicas
 
-**Infraestructura:** Linux, Proxmox, VMware, pfSense, Fortinet  
-**Cloud:** AWS, Terraform, Ansible  
+**Infraestructura:** Linux, Proxmox, VMware, OpenSense, Fortinet    
 **Contenedores:** Docker, Docker Compose  
 **Redes:** VLANs, Routing, ACLs, VPN, DHCP, DNS  
 **Automatización:** Python, Bash, PowerShell, YAML  
